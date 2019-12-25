@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url("/as//resources/images/bg_code.jpg") center center no-repeat fixed;
+    background-size: cover;
+}
+
+html, body, #wrapper {
+    height: 100%;
+}
+
+
+.dark-line {
+    text-align: center;
+    color: wheat;
+    padding: 0.5em 0;
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+.dark-line h3{
+    float: right;
+    margin-right: 10px;
+}
+
+#wrapper {
+    display: grid;
+    grid-template-areas: "h" "m" "f";
+    grid-template-rows: auto 1fr auto;
+}
+
+header {
+    grid-area: h;
+}
+
+main {
+    grid-area: m;
+}
+
+footer {
+    grid-area: f;
+}
+
+main #view {
+    max-width: 1000px;
+    margin: 30px auto 0 auto;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    padding: 20px;
+}
+
+#menu-top {
+    position: fixed;
+    transition: 1s;
+    width: 100%;
+    overflow: hidden;
+}
+
+#menu-top li {
+    list-style: none;
+    float: left;
+    width: 24.55%;
+    background: rgba(0, 0, 0, 0.7);
+    margin: 0 0.2%;
+}
+
+
+#menu-top a {
+    color: wheat;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 3px 0;
+    transition: 0.5s ease-in-out;
+}
+#menu-top a:hover {
+    text-shadow: 0px 0px 5px white;
+}
+
+#menu-top-mobile-icon {
+    display: none;
+}
+
+.menu-active{
+    background: black;
+    color: white !important;
+}
+
+
+.row-new-form{
+    display: none;
+}
+
+
+
+@media (max-width: 1200px) {
+
+    #menu-top-mobile-icon {
+        position: fixed;
+        margin-top: 5px;
+        margin-left: 5px;
+        display: block;
+        width: 40px;
+        float: left;
+    }
+
+    #menu-top-mobile-icon hr {
+        height: 3px;
+        color: wheat;
+        background: wheat;
+        border-radius: 10px;
+        margin-top: 2px;
+    }
+
+    #menu-top {
+        width: 200px;
+        overflow: hidden;
+        margin-top: 30px;
+        margin-left: -195px;
+        transition: 5s;
+    }
+
+    #menu-top:hover {
+        transition: ease-in-out 0.3s;
+        margin-left: 0;
+    }
+
+    #menu-top nav {
+        overflow: hidden;
+    }
+
+    #menu-top nav li {
+        list-style: none;
+        width: 95%;
+        background: rgba(0, 0, 0, 0.7);
+        margin-top: 2px;
+        padding: 3px;
+        border-right: 3px wheat solid;
+    }
+
+    #menu-top nav li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+
+}
