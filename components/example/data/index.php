@@ -14,6 +14,7 @@ $rows = $data->index();
     <button id="row-save">Speichern</button>
 </div>
 
+<div class="rows">
 
 <?php foreach ($rows as $row) { ?>
 
@@ -39,3 +40,4 @@ $rows = $data->index();
     <hr>
 
 <?php } ?>
+</div>

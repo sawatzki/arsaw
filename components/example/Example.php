@@ -7,7 +7,7 @@ class Example extends BaseModel
     {
         $data = null;
 
-        $query = "SELECT * FROM examples WHERE active = 1 ORDER BY id ASC";
+        $query = "SELECT * FROM examples WHERE active = 1 ORDER BY id DESC";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

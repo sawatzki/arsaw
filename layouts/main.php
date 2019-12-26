@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>ARTEM SAWATZKI</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/as/resources/css/style.css">
 </head>
 
@@ -13,37 +15,43 @@
 <div id="wrapper">
     <header>
 
-        <div id="menu-top-mobile-icon">
-            <hr>
-            <hr>
-            <hr>
-        </div>
-
-        <div id="menu-top">
-            <nav>
-                <ul>
-                    <li><a class="<?= $component === "todo" ? "menu-active" : "" ?>" href="index.php?component=todo">Aufgabenliste</a></li>
-                    <li><a class="<?= $component === "notes" ? "menu-active" : "" ?>" href="index.php?component=notes">NOTIZEN</a></li>
-                    <li><a class="<?= $component === "appointment" ? "menu-active" : "" ?>" href="index.php?component=appointment">TERMINE</a></li>
-                    <li><a class="<?= $component === "example" ? "menu-active" : "" ?>" href="index.php?component=example">EXAMPLE</a></li>
+        <nav class="navbar navbar-expand-lg as-bg-rgba-dark fixed-top">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span id="menu-top-mobile-icon">
+                    <hr>
+                    <hr>
+                    <hr>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link col-md-12 text-right pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
+                           href="index.php?component=example">EXAMPLE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link col-md-12 text-right pr-3 text-wheat <?= $component === "todo" ? "menu-active" : "" ?>"
+                           href="index.php?component=todo">TODO</a>
+                    </li>
                 </ul>
-            </nav>
-        </div>
+            </div>
+        </nav>
 
     </header>
 
     <main>
-        <div id="view">
-            <?php require_once "components/$component/controller.php"; ?>
-        </div>
+        <div id="view"><?php require_once "components/$component/controller.php"; ?></div>
     </main>
 
     <footer>
-        <div id="footer">
+        <div id="footer" class="as-bg-rgba-dark text-wheat p-3">
             <h3>FOOTER</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa cumque distinctio ratione totam?
+            <div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa cumque distinctio ratione totam?
                 Alias aliquam assumenda autem corporis deserunt distinctio in ipsam iste laudantium magni nobis
-                quibusdam quis quod, ratione vero, voluptatibus.</p>
+                quibusdam quis quod, ratione vero, voluptatibus.
+            </div>
         </div>
         <div class="dark-line">
             <h3>ARTEM SAWATZKI</h3>
@@ -53,6 +61,13 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="/as/resources/js/main.js"></script>
 <script src="../as/components/<?= $component ?>/code.js"></script>
 </body>
