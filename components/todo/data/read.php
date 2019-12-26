@@ -3,7 +3,7 @@
 
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/as/components/example/Example.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/components/example/Example.php";
 
 if (isset($_POST["id"])) {
 

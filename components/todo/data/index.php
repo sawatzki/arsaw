@@ -1,7 +1,13 @@
 <div id="todo">
 <?php
+echo "!!!!!<hr>";
+echo "!!!!!<hr>";
+echo "!!!!!<hr>";
+echo "!!!!!<hr>";
+echo "!!!!!<hr>";
+echo "!!!!!<hr>";
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/as/components/example/Example.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/components/example/Example.php";
 
 $data = new Todo();
 $examples = $data->index();

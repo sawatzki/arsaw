@@ -64,7 +64,7 @@ $(document).ready(function () {
                 id: id
             },
             success: function (data) {
-                $("#" + view).html(data);
+                $("#root").html(data);
             }
         });
     });

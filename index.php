@@ -10,4 +10,4 @@ if(isset($_GET['component'])){
     $component = "todo";
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/as/layouts/main.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/main.php";

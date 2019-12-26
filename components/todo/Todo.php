@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER["DOCUMENT_ROOT"] . "../as/BaseModel.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . "../BaseModel.php";
 
 class Todo extends BaseModel
 {

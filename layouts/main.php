@@ -8,14 +8,22 @@
     <title>ARTEM SAWATZKI</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/as/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
 </head>
 
 <body>
 <div id="wrapper">
-    <header>
+    <header class="fixed-top">
+        <div class="black-line" data-toggle="collapse" data-target="#black-line-contact">
+            <div class="username">Artem Sawatzki</div>
+            <div id="black-line-contact" class="collapse">
+                <div>Handy: 0176 47607548</div>
+                <div>Email: artsawatzki@gmail.com</div>
+                <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg as-bg-rgba-dark">
 
-        <nav class="navbar navbar-expand-lg as-bg-rgba-dark fixed-top">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span id="menu-top-mobile-icon">
@@ -24,15 +32,16 @@
                     <hr>
                 </span>
             </button>
+<!--            <div class="top-view"><span>--><?//= $component; ?><!--</span></div>-->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
-                           href="index.php?component=example">EXAMPLE</a>
+                           href="index.php?component=example">MUSTER</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "todo" ? "menu-active" : "" ?>"
-                           href="index.php?component=todo">TODO</a>
+                           href="index.php?component=todo">AUFGABEN</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "---" ? "menu-active" : "" ?>"
@@ -44,7 +53,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="view"><span><?= $component; ?></span></div>
+
         </nav>
 
     </header>
@@ -77,8 +86,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="/as/resources/js/main.js"></script>
-<script src="../as/components/<?= $component ?>/code.js"></script>
+<script type="text/javascript" src="/resources/js/main.js"></script>
+<script src="../components/<?= $component ?>/code.js"></script>
 </body>
 
 </html>

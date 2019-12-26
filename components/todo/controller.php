@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/as/components/$component/Todo.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/components/$component/Todo.php";
 
 $data = new Todo();
 $rows = $data->index();

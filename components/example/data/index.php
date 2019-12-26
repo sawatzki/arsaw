@@ -1,6 +1,11 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/as/components/example/Example.php";
+$file_path = explode("www", __DIR__);
+if (isset($file_path[1])){
+    include_once $_SERVER['DOCUMENT_ROOT'] . $file_path[1] . "/../Example.php";
+}else{
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/components/example/Example.php";
+}
 
 $data = new Example();
 $rows = $data->index();
@@ -10,7 +15,7 @@ $rows = $data->index();
 
 <?php foreach ($rows as $row) { ?>
 
-    <div id="row-<?= $row['id'] ?>">
+    <div class="row" id="row-<?= $row['id'] ?>">
         <div id="row-title-<?= $row['id'] ?>"><?= $row['title']; ?></div>
         <div id="row-description-<?= $row['id'] ?>"><?= $row['description']; ?></div>
         <button type="button" class="example-read" value="<?= $row['id'] ?>">read</button>

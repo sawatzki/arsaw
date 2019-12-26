@@ -4,7 +4,7 @@
 }
 
 body {
-    background: url("/as//resources/images/bg_code.jpg") center center no-repeat fixed;
+    background: url("/resources/images/bg_code.jpg") center center no-repeat fixed;
     background-size: cover;
 }
 
@@ -50,7 +50,7 @@ footer {
 
 main #view {
     max-width: 1000px;
-    margin: 55px auto 0 auto;
+    margin: 64px auto 0 auto;
     background: rgba(0,0,0,0.3);
     color: white;
     padding: 20px;
@@ -80,16 +80,28 @@ a.text-wheat:focus, a.text-wheat:hover{
     color: wheat;
 }
 
-.view{
+.top-view{
     float: right;
-    padding: 0.41em 2em;
+    /*padding: 0.43em 2em;*/
     text-transform: uppercase;
-    /* line-height: 2; */
     font-size: 1.5em;
     font-weight: 700;
     color: white;
 }
 
+.black-line{
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+.username{
+
+}
+
+.navbar{
+    padding: 0;
+}
 
 @media (max-width: 992px) {
 

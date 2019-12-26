@@ -54,7 +54,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="/as/resources/js/main.js"></script>
-<script src="../as/components/<?= $component ?>/code.js"></script>
+<script src="../components/<?= $component ?>/code.js"></script>
 </body>
 
 </html>
