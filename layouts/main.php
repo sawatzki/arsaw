@@ -27,15 +27,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link col-md-12 text-right pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
+                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">EXAMPLE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link col-md-12 text-right pr-3 text-wheat <?= $component === "todo" ? "menu-active" : "" ?>"
+                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "todo" ? "menu-active" : "" ?>"
                            href="index.php?component=todo">TODO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "---" ? "menu-active" : "" ?>"
+                           href="#">TERMINE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "---" ? "menu-active" : "" ?>"
+                           href="#">KONTAKT</a>
                     </li>
                 </ul>
             </div>
+            <div class="view"><span><?= $component; ?></span></div>
         </nav>
 
     </header>

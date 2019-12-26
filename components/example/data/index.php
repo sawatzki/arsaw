@@ -6,14 +6,6 @@ $data = new Example();
 $rows = $data->index();
 ?>
 
-<button type="button" class="row-new">new</button>
-
-<div class="row-new-form">
-    <input name="title" type="text" placeholder="Titel">
-    <input name="description" type="text" placeholder="Beschreibung">
-    <button id="row-save">Speichern</button>
-</div>
-
 <div class="rows">
 
 <?php foreach ($rows as $row) { ?>
@@ -21,8 +13,8 @@ $rows = $data->index();
     <div id="row-<?= $row['id'] ?>">
         <div id="row-title-<?= $row['id'] ?>"><?= $row['title']; ?></div>
         <div id="row-description-<?= $row['id'] ?>"><?= $row['description']; ?></div>
-        <button class="example-read" value="<?= $row['id'] ?>">read</button>
-        <button class="row-edit" value="<?= $row['id'] ?>">edit</button>
+        <button type="button" class="example-read" value="<?= $row['id'] ?>">read</button>
+        <button type="button" class="row-edit" value="<?= $row['id'] ?>">edit</button>
         <?php if ($row['active']) { ?>
             <button type="button" class="example-delete" value="<?= $row['id'] ?>">off</button>
         <?php } else { ?>

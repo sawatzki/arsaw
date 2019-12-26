@@ -4,6 +4,15 @@ $(document).ready(function () {
     let arrView = url.split("=");
     let view = arrView[1];
 
+    function fetchRows() {
+        $.ajax({
+            url: "components/" + view + "/data/index.php",
+            success: function (data) {
+                $(".rows").html(data);
+            }
+        });
+    }
+
     function fetch() {
         $.ajax({
             url: "components/" + view + "/data/index.php",
@@ -135,7 +144,7 @@ $(document).ready(function () {
                 description: description
             },
             success: function(data){
-                fetch();
+                fetchRows();
             }
         });
 
