@@ -89,4 +89,15 @@ class Example extends BaseModel
 
 
     }
+
+
+    public function seeds($data)
+    {
+        $query = "INSERT INTO examples (title, description, active) VALUES ('$data[title]', '$data[description]', '1')";
+        if ($stmt = $this->conn->exec($query)) {
+            return "inserted";
+        } else {
+            return "NOT inserted";
+        }
+    }
 }

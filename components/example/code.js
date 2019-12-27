@@ -150,5 +150,17 @@ $(document).ready(function () {
 
     });
 
+$(document).on("click", ".seeds", function(){
+
+        $.ajax({
+            url: "components/" + view + "/data/seeds.php",
+            success: function(data){
+                console.log(view + "seeds generated");
+                fetchRows();
+            }
+        });
+
+    });
+
 
 });

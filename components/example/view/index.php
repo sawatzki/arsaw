@@ -1,3 +1,4 @@
+<button type="button" class="seeds">SEED</button>
 <button type="button" class="row-new">new</button>
 
 <div class="row-new-form">
