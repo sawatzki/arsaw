@@ -28,7 +28,7 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on("click", ".example-show-all", function () {
+    $(document).on("click", ".rows-show-all", function () {
         fetch();
     });
 

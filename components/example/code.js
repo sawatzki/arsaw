@@ -4,50 +4,144 @@ $(document).ready(function () {
     let arrView = url.split("=");
     let view = arrView[1];
 
+    let inProgress = false;
+    let startFrom = 0;
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500 && !inProgress) {
+            fetchRows();
+        }
+    });
+
+
     function fetchRows() {
         $.ajax({
             url: "components/" + view + "/data/index.php",
+            type: "post",
+            dataType: "json",
+            data: {
+                startFrom: startFrom,
+            },
             success: function (data) {
-                $(".rows").html(data);
+
+                let out = '';
+
+                $.each(data, function (index, row) {
+
+                    out += "<div class='row' id='row-" + row.id + "'>";
+                    out += "<div class='row-value'>";
+                    out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
+                    out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
+                    out += "</div>";
+                    out += "<div class='cmd-group'>";
+                    out += "<button type='button' class='example-read' value='" + row.id + "'>read</button>";
+                    out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
+                    if (row.active == 1) {
+                        out += "<button type='button' class='example-delete' act='1' value='" + row.id + "'>off</button>";
+                    } else {
+                        out += "<button type='button' class='example-delete' act='0' value='" + row.id + "'>on</button>";
+                    }
+                    out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
+                    out += "</div>";
+
+                    out += "<div id='edit-row-" + row.id + "' style='display: none'>";
+                    out += "<input type='text' name='row_title_" + row.id + "' value='" + row.title + "' placeholder='Titel'/>";
+                    out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
+                    out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
+                    out += "</div>";
+
+                    out += "</div>";
+
+                });
+
+
+                $(".rows").append(out);
+
+                inProgress = false;
+                startFrom += 10;
+            },
+            beforeSend: function () {
+                // inProgress = true;
             }
         });
     }
 
     function fetch() {
+
+        startFrom = 0;
+
         $.ajax({
             url: "components/" + view + "/data/index.php",
+            type: "post",
+            dataType: "json",
+            data: {
+                startFrom: startFrom
+            },
             success: function (data) {
-                $("#root").html(data);
-            }
+
+                let out = '';
+
+                $.each(data, function (index, row) {
+
+                    out += "<div class='row' id='row-" + row.id + "'>";
+                    out += "<div class='row-value'>";
+                    out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
+                    out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
+                    out += "</div>";
+                    out += "<div class='cmd-group'>";
+                    out += "<button type='button' class='example-read' value='" + row.id + "'>read</button>";
+                    out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
+                    if (row.active == 1) {
+                        out += "<button type='button' class='example-delete' act='1' value='" + row.id + "'>off</button>";
+                    } else {
+                        out += "<button type='button' class='example-delete' act='0' value='" + row.id + "'>on</button>";
+                    }
+                    out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
+                    out += "</div>";
+
+                    out += "<div id='edit-row-" + row.id + "' style='display: none'>";
+                    out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
+                    out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='5' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
+                    out += "<button class='row-update' value='" + row.id + "'>upd</button>";
+                    out += "</div>";
+
+                    out += "</div>";
+
+                });
+
+
+                $(".rows").html(out);
+
+            },
         });
     }
-    fetch();
+
+    fetchRows();
 
 
-    $(document).on("click", ".row-edit", function(){
+    $(document).on("click", ".row-edit", function () {
         let id = $(this).attr("value");
-        // alert(".row-edit-"+id);
-        $("#edit-row-"+id).slideToggle();
+        $("#edit-row-" + id).slideToggle();
     });
 
-    $(document).on("click", ".row-update", function(){
+    $(document).on("click", ".row-update", function () {
 
         let id = $(this).attr("value");
-        let title = $("[name='row_title_"+id+"']").val();
-        let description = $("[name='row_description_"+id+"']").val();
+        let title = $("[name='row_title_" + id + "']").val();
+        let description = $("[name='row_description_" + id + "']").val();
 
         $.ajax({
             url: "components/" + view + "/data/update.php",
             type: "post",
             dataType: "json",
-            data:{
+            data: {
                 id: id,
                 title: title,
                 description: description
             },
-            success: function(data){
-                $("#row-title-"+id).html(data.title);
-                $("#row-description-"+id).html(data.description);
+            success: function (data) {
+                $("#row-title-" + id).html(data.title);
+                $("#row-description-" + id).html(data.description);
             }
         });
 
@@ -64,33 +158,45 @@ $(document).ready(function () {
                 id: id
             },
             success: function (data) {
-                $("#root").html(data);
+                $(".rows").html(data);
             }
         });
     });
 
-    $(document).on("click", ".example-show-all", function () {
+    $(document).on("click", ".rows-show-all", function () {
         fetch();
     });
 
     $(document).on("click", ".example-delete", function () {
 
-
         if (window.confirm("Wirklich löschen ?")) {
 
             let id = $(this).attr("value");
+            let active = $(this).attr("act");
 
             $.ajax({
                 url: "components/" + view + "/data/delete.php",
                 type: "post",
                 data: {
-                    id: id
+                    id: id,
+                    active: active
                 },
                 success: function (data) {
-                    $("#" + view).html(data);
+                    if (data) {
+                        $("#rows-info").css("display", "block");
+                        $(".rows-info").removeClass();
+                        $("#rows-info").addClass("rows-info rows-info-success");
+                        $("#rows-info").html("GELÖSCHT !");
+                        fetch();
+                    } else {
+                        $("#rows-info").css("display", "block");
+                        $(".rows-info").removeClass();
+                        $("#rows-info").addClass("rows-info rows-info-error");
+                        $("#rows-info").html("NICHT gelöscht !");
+                    }
                 }
             });
-            fetch();
+
 
         } else {
             return false;
@@ -98,10 +204,10 @@ $(document).ready(function () {
 
     });
 
-    $(document).on("click", ".example-destroy", function () {
+    $(document).on("click", ".row-destroy", function () {
 
         if (window.confirm("Wirklich löschen ?")) {
-            if(window.confirm("Ohne Wiederherstellmöglichkeit ?")) {
+            if (window.confirm("Ohne Wiederherstellmöglichkeit ?")) {
 
                 let id = $(this).attr("value");
 
@@ -112,26 +218,37 @@ $(document).ready(function () {
                         id: id
                     },
                     success: function (data) {
-                        $("#" + view).html(data);
-                        fetch();
+                        if (data) {
+                            $("#rows-info").css("display", "block");
+                            $(".rows-info").removeClass();
+                            $("#rows-info").addClass("rows-info rows-info-success");
+                            $("#rows-info").html("Row destroyed");
+                            fetch();
+                        } else {
+                            $("#rows-info").css("display", "block");
+                            $(".rows-info").removeClass();
+                            $("#rows-info").addClass("rows-info rows-info-error");
+                            $("#rows-info").html("NICHT gelöscht !");
+                        }
                     }
                 });
-
-                fetch();
-            }else{
+            } else {
                 return false;
             }
-        }else {
+        } else {
             return false
         }
     });
 
+    $(document).on("click", ".rows-info", function () {
+        $(".rows-info").slideToggle();
+    });
 
-    $(document).on("click",".row-new",function(){
+    $(document).on("click", ".row-new", function () {
         $(".row-new-form").slideToggle();
     });
 
-    $(document).on("click", "#row-save", function(){
+    $(document).on("click", "#row-save", function () {
 
         let title = $("[name='title']").val();
         let description = $("[name='description']").val();
@@ -143,20 +260,31 @@ $(document).ready(function () {
                 title: title,
                 description: description
             },
-            success: function(data){
-                fetchRows();
+            success: function (data) {
+                if (data) {
+                    $("#rows-info").css("display", "block");
+                    $(".rows-info").removeClass();
+                    $("#rows-info").addClass("rows-info rows-info-success");
+                    $("#rows-info").html("Gespeichert");
+                    fetch();
+                } else {
+                    $("#rows-info").css("display", "block");
+                    $(".rows-info").removeClass();
+                    $("#rows-info").addClass("rows-info rows-info-error");
+                    $("#rows-info").html("NICHT gespeichert !");
+                }
             }
         });
 
     });
 
-$(document).on("click", ".seeds", function(){
+    $(document).on("click", ".seeds", function () {
 
         $.ajax({
             url: "components/" + view + "/data/seeds.php",
-            success: function(data){
+            success: function (data) {
                 console.log(view + "seeds generated");
-                fetchRows();
+                fetch();
             }
         });
 

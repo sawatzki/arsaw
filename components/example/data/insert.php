@@ -11,4 +11,8 @@ if (isset($file_path[1])){
 $obj = new Example();
 $insert = $obj->insert();
 
-echo "DATA_INSERT:";
+if($insert){
+    echo true;
+}else{
+    echo false;
+}

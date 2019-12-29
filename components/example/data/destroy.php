@@ -13,5 +13,12 @@ if (isset($_POST["id"])) {
     $id = $_POST['id'];
 
     $data = new Example();
-    $row = $data->destroy($id);
+    $destroy = $data->destroy($id);
+
+    if($destroy){
+        echo true;
+    }else{
+        echo false;
+    }
+
 }

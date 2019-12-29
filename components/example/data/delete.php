@@ -11,8 +11,24 @@ if (isset($file_path[1])){
 if (isset($_POST["id"])) {
 
     $id = $_POST['id'];
+    $active = $_POST['active'];
+
+//    echo ":::-:::" . $_POST['active'] . " !!!";
+
+    if($active == "0"){
+        $active = 1;
+    }else{
+        $active = 0;
+    }
+
 
     $data = new Example();
-    $row = $data->delete($id);
-    echo $row;
+
+    $delete = $data->delete($id, $active);
+
+    if($delete){
+        echo true;
+    }else{
+        echo false;
+    }
 }

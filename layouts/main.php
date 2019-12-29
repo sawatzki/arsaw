@@ -9,11 +9,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/components/<?= $component ?>/style.css">
 </head>
 
 <body>
 <div id="wrapper">
     <header class="fixed-top">
+
         <div class="black-line" data-toggle="collapse" data-target="#black-line-contact">
             <div class="username">Artem Sawatzki</div>
             <div id="black-line-contact" class="collapse">
@@ -22,6 +24,7 @@
                 <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>
             </div>
         </div>
+
         <nav class="navbar navbar-expand-lg as-bg-rgba-dark">
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -57,7 +60,7 @@
         </nav>
 
     </header>
-
+    <div id="rows-info">OK</div>
     <main>
         <div id="view"><?php require_once "components/$component/controller.php"; ?></div>
     </main>

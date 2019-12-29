@@ -21,7 +21,7 @@ html, body, #wrapper {
     overflow: hidden;
 }
 
-.dark-line h3{
+.dark-line h3 {
     float: right;
     margin-right: 10px;
 }
@@ -32,8 +32,8 @@ html, body, #wrapper {
     grid-template-rows: auto 1fr auto;
 }
 
-.as-bg-rgba-dark{
-    background: rgba(0,0,0,0.7);
+.as-bg-rgba-dark {
+    background: rgba(0, 0, 0, 0.7);
 }
 
 header {
@@ -51,36 +51,88 @@ footer {
 main #view {
     max-width: 1000px;
     margin: 64px auto 0 auto;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     color: white;
     padding: 20px;
 }
 
-.menu-active{
-    background: rgba(0,0,0,0.5);
+.menu-active {
+    background: rgba(0, 0, 0, 0.5);
     color: white !important;
 }
+
 /*.nav-item > a.menu-active:focus, */
-.nav-item > a.menu-active:hover{
+.nav-item > a.menu-active:hover {
     color: white !important;
     text-shadow: 0px 0px 5px white !important;
-    background: rgba(0,0,0,0.5) !important;
+    background: rgba(0, 0, 0, 0.5) !important;
 }
 
-.row-new-form{
+.cmd-group {
+    float: right;
+}
+
+.btns{
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 0 15px;
+    text-align: center;
+}
+.btns:hover{
+    text-shadow: 0px 0px 5px white;
+    font-weight: 700;
+}
+
+#data-read{
+    background: rgba(0,0,0,0.5);
+    padding: 10px 20px;
+}
+
+.row {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    margin-bottom: 20px;
+    display: block;
+    overflow: hidden;
+}
+
+.row button {
+    background: rgba(0, 0, 0, 0);
+    color: darkgray;
+    padding: 1px 5px;
+}
+
+.row-new-form {
     display: none;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
 }
 
-.text-wheat{
+.row-new-form input,
+.row-new-form textarea {
+    width: 100%;
+}
+
+.row-new-form textarea {
+    min-height: 100px;
+    padding: 5px 10px;
+}
+
+.row-new-form input {
+    padding: 5px 10px;
+}
+
+.text-wheat {
     color: wheat;
 }
 
-a.text-wheat:focus, a.text-wheat:hover{
+a.text-wheat:focus, a.text-wheat:hover {
     text-shadow: 0px 0px 5px wheat;
     color: wheat;
 }
 
-.top-view{
+.top-view {
     float: right;
     /*padding: 0.43em 2em;*/
     text-transform: uppercase;
@@ -89,26 +141,70 @@ a.text-wheat:focus, a.text-wheat:hover{
     color: white;
 }
 
-.black-line{
+.black-line {
     background: black;
     color: white;
     text-align: center;
 }
 
-.username{
+.username {
 
 }
 
-.navbar{
+.navbar {
     padding: 0;
 }
 
+[name^='row_description_'] {
+    /*width: 100%;*/
+}
+
+.input-text-edit {
+    background: rgba(0, 0, 0, 0.3);
+    color: lightgray;
+}
+
+.rows-info-success {
+    background: rgba(255, 255, 255, 0.9);
+    color: green !important;
+}
+
+.rows-info-error {
+    background: rgba(255, 0, 0, 0.9);
+}
+
+#rows-info {
+    width: 50%;
+    margin-left: 25%;
+    text-align: center;
+    border: solid black 5px;
+    border-radius: 5px;
+    display: none;
+    padding: 10px;
+    color: white;
+    position: fixed;
+    margin-top: 100px;
+    z-index: 1030;
+}
+
+[id^='row-title-'] {
+}
+
+[id^='row-description-'] {
+}
+
 @media (max-width: 992px) {
+
+    #rows-info {
+        width: 90%;
+        margin-left: 5%;
+    }
 
     #menu-top-mobile-icon {
         display: block;
         width: 40px;
         float: left;
+        margin-left: 10px;
     }
 
     #menu-top-mobile-icon hr {
@@ -121,12 +217,12 @@ a.text-wheat:focus, a.text-wheat:hover{
         margin: 8px 0;
     }
 
-    .navbar-toggler{
+    .navbar-toggler {
         padding: 0;
         border: 0;
     }
 
-    .navbar-nav .nav-link{
+    .navbar-nav .nav-link {
         text-align: right;
     }
 

@@ -4,11 +4,11 @@ include_once $_SERVER["DOCUMENT_ROOT"] . "/BaseModel.php";
 
 class Example extends BaseModel
 {
-    public function index()
+    public function index($startFrom)
     {
         $data = null;
 
-        $query = "SELECT * FROM examples WHERE active = 1 ORDER BY id DESC";
+        $query = "SELECT * FROM examples ORDER BY id DESC LIMIT $startFrom, 10";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -43,13 +43,11 @@ class Example extends BaseModel
         }
     }
 
-    public function delete($id)
+    public function delete($id, $active)
     {
         $data = null;
 
-        $active = false;
-
-        $query = "UPDATE examples SET active = '$active' WHERE id = '$id'";
+        $query = "UPDATE examples SET active = $active WHERE id = '$id'";
 
         if ($stmt = $this->conn->exec($query)) {
             return true;
