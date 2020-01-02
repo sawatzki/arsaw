@@ -1,7 +1,10 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/components/$component/Example.php";
+//require_once $_SERVER['DOCUMENT_ROOT'] . "/components/$component/Example.php";
+$sub = str_replace('index.php','', $_SERVER["PHP_SELF"]);
+$root = $_SERVER['DOCUMENT_ROOT'];
+require_once $root . $sub . "/components/$component/Example.php";
 
 $data = new Example();
-//$examples = $data->index();
+
 
 require_once "components/$component/view/index.php";

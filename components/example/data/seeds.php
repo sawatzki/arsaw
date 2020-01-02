@@ -1,16 +1,16 @@
 <?php
 
-if (isset($file_path[1])) {
-    include_once $_SERVER['DOCUMENT_ROOT'] . $file_path[1] . "/../Example.php";
-} else {
-    include_once $_SERVER['DOCUMENT_ROOT'] . "/components/example/Example.php";
-}
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__) . $ds . '..') . $ds;
+
+include_once "{$base_dir}Example.php";
+
 
 $obj = new Example();
 
 $data[] = array();
 
-for ($i = 1; $i <= 77777; $i++) {
+for ($i = 1; $i <= 33; $i++) {
 
     $data['title'] = "Title $i";
     $data['description'] = "
@@ -19,5 +19,7 @@ for ($i = 1; $i <= 77777; $i++) {
 
     $insert = $obj->seeds($data);
 }
+
+echo $insert;
 
 

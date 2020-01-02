@@ -1,6 +1,9 @@
 <?php
 
-include_once $_SERVER["DOCUMENT_ROOT"] . "/BaseModel.php";
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__) . $ds . '..' . $ds . '..') . $ds;
+
+include_once "{$base_dir}BaseModel.php";
 
 class Example extends BaseModel
 {
@@ -98,4 +101,18 @@ class Example extends BaseModel
             return "NOT inserted";
         }
     }
+
+    public function turncate()
+    {
+//        die();
+        $query = "TRUNCATE TABLE examples";
+//        echo $query;
+        if ($stmt = $this->conn->exec($query)) {
+            echo $stmt;
+        } else {
+            echo $stmt;
+        }
+    }
+
+
 }

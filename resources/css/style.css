@@ -3,11 +3,6 @@
     padding: 0;
 }
 
-body {
-    background: url("/resources/images/bg_code.jpg") center center no-repeat fixed;
-    background-size: cover;
-}
-
 html, body, #wrapper {
     height: 100%;
 }

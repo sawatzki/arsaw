@@ -1,12 +1,9 @@
 <?php
 
-$file_path = explode("www", __DIR__);
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__) . $ds . '..') . $ds;
 
-if (isset($file_path[1])){
-    include_once $_SERVER['DOCUMENT_ROOT'] . $file_path[1] . "/../Example.php";
-}else{
-    include_once $_SERVER['DOCUMENT_ROOT'] . "/components/example/Example.php";
-}
+include_once "{$base_dir}Example.php";
 
 $obj = new Example();
 $insert = $obj->insert();

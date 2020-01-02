@@ -290,5 +290,17 @@ $(document).ready(function () {
 
     });
 
+    $(document).on("click", ".turn-cate", function () {
+
+        $.ajax({
+            url: "components/" + view + "/data/turnCate.php",
+            success: function (data) {
+                console.log(view + "seeds generated");
+                fetch();
+            }
+        });
+
+    });
+
 
 });

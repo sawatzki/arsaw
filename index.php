@@ -2,12 +2,15 @@
 
 define("ROOT", $_SERVER['DOCUMENT_ROOT']);
 
-$component = "todo";
+$component = "example";
 
 if(isset($_GET['component'])){
     $component = $_GET['component'];
 }else{
-    $component = "todo";
+    $component = "example";
 }
 
-require_once $_SERVER['DOCUMENT_ROOT'] . "/layouts/main.php";
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__)) . $ds;
+
+include_once "{$base_dir}layouts{$ds}main.php";
