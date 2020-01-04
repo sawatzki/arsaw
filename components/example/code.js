@@ -8,13 +8,17 @@ $(document).ready(function () {
     let startFrom = 0;
 
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 500 && !inProgress) {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() && !inProgress) {
             fetchRows();
         }
     });
 
-
     function fetchRows() {
+
+        if(!view){
+            view = "example";
+        }
+
         $.ajax({
             url: "components/" + view + "/data/index.php",
             type: "post",
@@ -45,9 +49,9 @@ $(document).ready(function () {
                     out += "</div>";
 
                     out += "<div id='edit-row-" + row.id + "' style='display: none'>";
-                    out += "<input type='text' name='row_title_" + row.id + "' value='" + row.title + "' placeholder='Titel'/>";
                     out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
                     out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
+                    out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
                     out += "</div>";
 
                     out += "</div>";
@@ -102,7 +106,7 @@ $(document).ready(function () {
                     out += "<div id='edit-row-" + row.id + "' style='display: none'>";
                     out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
                     out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='5' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
-                    out += "<button class='row-update' value='" + row.id + "'>upd</button>";
+                    out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
                     out += "</div>";
 
                     out += "</div>";
@@ -124,7 +128,7 @@ $(document).ready(function () {
         $("#edit-row-" + id).slideToggle();
     });
 
-    $(document).on("click", ".row-update", function () {
+    $(document).on("click", ".btn-row-update", function () {
 
         let id = $(this).attr("value");
         let title = $("[name='row_title_" + id + "']").val();

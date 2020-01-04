@@ -157,6 +157,7 @@ a.text-wheat:focus, a.text-wheat:hover {
 .input-text-edit {
     background: rgba(0, 0, 0, 0.3);
     color: lightgray;
+    width: 50%;
 }
 
 .rows-info-success {

@@ -42,9 +42,9 @@
                     <hr>
                 </span>
             </button>
-<!--            <div class="top-view"><span>--><?//= $component; ?><!--</span></div>-->
+            <!--            <div class="top-view"><span>--><? //= $component; ?><!--</span></div>-->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">MUSTER</a>
