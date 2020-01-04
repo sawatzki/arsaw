@@ -9,12 +9,12 @@ $(document).ready(function () {
     let rowsCount = 5;
 
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()-100 && !inProgress) {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100 && !inProgress) {
             fetchRows();
         }
     });
 
-    function nl2br (str, is_xhtml) {
+    function nl2br(str, is_xhtml) {
         if (typeof str === 'undefined' || str === null) {
             return '';
         }
@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     function fetchRows() {
 
-        if(!view){
+        if (!view) {
             view = "example";
         }
 
@@ -44,13 +44,14 @@ $(document).ready(function () {
 
                     $.each(data, function (index, row) {
 
+                        // out += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Launch demo modal </button>';
                         out += "<div class='row' id='row-" + row.id + "'>";
                         out += "<div class='row-value'>";
                         out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
                         out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
                         out += "</div>";
                         out += "<div class='cmd-group'>";
-                        out += "<button type='button' class='example-read' value='" + row.id + "'>read</button>";
+                        out += "<button type='button' class='example-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
                         out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
                         if (row.active == 1) {
                             out += "<button type='button' class='example-delete' act='1' value='" + row.id + "'>off</button>";
@@ -73,6 +74,7 @@ $(document).ready(function () {
 
                     $(".rows").append(nl2br(out));
 
+
                     inProgress = false;
                     startFrom += 5;
                 }
@@ -83,55 +85,56 @@ $(document).ready(function () {
         });
     }
 
-    function fetch() {
-
-        startFrom = 0;
-
-        $.ajax({
-            url: "components/" + view + "/data/index.php",
-            type: "post",
-            dataType: "json",
-            data: {
-                startFrom: startFrom
-            },
-            success: function (data) {
-
-                let out = '';
-
-                $.each(data, function (index, row) {
-
-                    out += "<div class='row' id='row-" + row.id + "'>";
-                    out += "<div class='row-value'>";
-                    out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
-                    out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
-                    out += "</div>";
-                    out += "<div class='cmd-group'>";
-                    out += "<button type='button' class='example-read' value='" + row.id + "'>read</button>";
-                    out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
-                    if (row.active == 1) {
-                        out += "<button type='button' class='example-delete' act='1' value='" + row.id + "'>off</button>";
-                    } else {
-                        out += "<button type='button' class='example-delete' act='0' value='" + row.id + "'>on</button>";
-                    }
-                    out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
-                    out += "</div>";
-
-                    out += "<div id='edit-row-" + row.id + "' style='display: none'>";
-                    out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
-                    out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='5' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
-                    out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
-                    out += "</div>";
-
-                    out += "</div>";
-
-                });
-
-
-                $(".rows").html(out);
-
-            },
-        });
-    }
+    // function fetch() {
+    //
+    //     startFrom = 0;
+    //
+    //     $.ajax({
+    //         url: "components/" + view + "/data/index.php",
+    //         type: "post",
+    //         dataType: "json",
+    //         data: {
+    //             startFrom: startFrom,
+    //             rowsCount: rowsCount,
+    //         },
+    //         success: function (data) {
+    //
+    //             let out = '';
+    //
+    //             $.each(data, function (index, row) {
+    //
+    //                 out += "<div class='row' id='row-" + row.id + "'>";
+    //                 out += "<div class='row-value'>";
+    //                 out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
+    //                 out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
+    //                 out += "</div>";
+    //                 out += "<div class='cmd-group'>";
+    //                 out += "<button type='button' class='example-read' value='" + row.id + "'>read</button>";
+    //                 out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
+    //                 if (row.active == 1) {
+    //                     out += "<button type='button' class='example-delete' act='1' value='" + row.id + "'>off</button>";
+    //                 } else {
+    //                     out += "<button type='button' class='example-delete' act='0' value='" + row.id + "'>on</button>";
+    //                 }
+    //                 out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
+    //                 out += "</div>";
+    //
+    //                 out += "<div id='edit-row-" + row.id + "' style='display: none'>";
+    //                 out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
+    //                 out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='5' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
+    //                 out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
+    //                 out += "</div>";
+    //
+    //                 out += "</div>";
+    //
+    //             });
+    //
+    //
+    //             $(".rows").html(nl2br(out));
+    //
+    //         },
+    //     });
+    // }
 
     fetchRows();
 
@@ -171,17 +174,39 @@ $(document).ready(function () {
         $.ajax({
             url: "components/" + view + "/data/read.php",
             type: "post",
+            dataType: "json",
             data: {
                 id: id
             },
             success: function (data) {
-                $(".rows").html(data);
+
+                let out = "";
+
+                out += "<div class='modal-dialog' role='document'>";
+                out += "<div class='modal-content'>";
+
+                out += "<h2 class='text-light text-center'>" + data.title + "</h2>";
+                out += "<hr class='hr-light'>";
+                out +=  "<div class='text-light text-center mb-3 p-2'>" + data.description + "</div>";
+
+                out += "<button type='button' class='btns' data-dismiss='modal'>Close</button>";
+                out += "</div>";
+                out += "</div>";
+
+
+                $("#modal-row-read").html(out);
+
             }
         });
     });
 
     $(document).on("click", ".rows-show-all", function () {
-        fetch();
+
+        inProgress = false;
+        startFrom = 0;
+        rowsCount = 5;
+
+        fetchRows();
     });
 
     $(document).on("click", ".example-delete", function () {

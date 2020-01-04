@@ -193,6 +193,24 @@ a.text-wheat:focus, a.text-wheat:hover {
 [id^='row-description-'] {
 }
 
+.rows-show-all{
+    cursor: pointer;
+}
+
+
+
+.hr-light{
+    background: darkgray;
+    height: 2px;
+    margin: 0;
+}
+
+/*bootstrap overwrite*/
+.modal-content{
+    background: rgba(0,0,0,0.5);
+}
+
+
 @media (max-width: 992px) {
 
     #rows-info {
