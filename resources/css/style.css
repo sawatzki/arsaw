@@ -78,6 +78,10 @@ main #view {
     font-weight: 700;
 }
 
+.btn-row-update{
+    width: 100%;
+}
+
 #data-read{
     background: rgba(0,0,0,0.5);
     padding: 10px 20px;
@@ -157,7 +161,7 @@ a.text-wheat:focus, a.text-wheat:hover {
 .input-text-edit {
     background: rgba(0, 0, 0, 0.3);
     color: lightgray;
-    width: 50%;
+    width: 100%;
 }
 
 .rows-info-success {

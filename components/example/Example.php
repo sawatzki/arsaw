@@ -7,11 +7,11 @@ include_once "{$base_dir}BaseModel.php";
 
 class Example extends BaseModel
 {
-    public function index($startFrom)
+    public function index($startFrom, $rowsCount)
     {
         $data = null;
 
-        $query = "SELECT * FROM examples ORDER BY id DESC LIMIT $startFrom, 10";
+        $query = "SELECT * FROM examples ORDER BY id DESC LIMIT $startFrom, $rowsCount";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
