@@ -23,14 +23,19 @@
 <div id="wrapper">
     <header class="fixed-top">
 
-        <div class="black-line" data-toggle="collapse" data-target="#black-line-contact">
-            <div class="username">Artem Sawatzki</div>
+
+
+        <div class="black-line">
+            <div class="login"><span class="btns" data-toggle="modal" data-target="#exampleModal">LOGIN</span></div>
+            <div class="username" data-toggle="collapse" data-target="#black-line-contact">Artem Sawatzki</div>
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
                 <div>Email: artsawatzki@gmail.com</div>
                 <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>
             </div>
+            <div class="theme-style"><span class="btns">Hell</span></div>
         </div>
+
 
         <nav class="navbar navbar-expand-lg as-bg-rgba-dark">
 
@@ -67,7 +72,30 @@
         </nav>
 
     </header>
-    <div id="rows-info">OK</div>
+
+    <!-- LOGIN modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-light" id="exampleModalLabel">ANMELDEN</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="login" placeholder="Login" value="User1">
+                    <input type="text" name="password" placeholder="Password" value="1234567">
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-login-close" type="button" class="btns" data-dismiss="modal">Close</button>
+                    <button id="btn-login-check" type="button" class="btns">Anmelden</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="rows-info"></div>
     <main>
         <div id="view"><?php require_once "components/$component/controller.php"; ?></div>
     </main>
