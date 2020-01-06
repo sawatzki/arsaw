@@ -32,10 +32,6 @@ $(document).ready(function () {
             view = "example";
         }
 
-        if (secondLoad) {
-            startFrom = 0;
-        }
-
         $.ajax({
             url: "components/" + view + "/data/index.php",
             type: "post",
@@ -61,9 +57,9 @@ $(document).ready(function () {
                         out += "<button type='button' class='example-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
                         out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
                         if (row.active == 1) {
-                            out += "<button type='button' class='example-delete' act='1' value='" + row.id + "'>off</button>";
+                            out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
                         } else {
-                            out += "<button type='button' class='example-delete' act='0' value='" + row.id + "'>on</button>";
+                            out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
                         }
                         out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
                         out += "</div>";
@@ -78,16 +74,12 @@ $(document).ready(function () {
 
                     });
 
+                    $(".rows").append(nl2br(out));
+
                     inProgress = false;
 
-                    if (!secondLoad) {
-                        $(".rows").append(nl2br(out));
+                    startFrom += 5;
 
-                        startFrom += 5;
-                    } else {
-                        $(".rows").html(nl2br(out));
-                    }
-                    secondLoad = false;
                 }
             },
             beforeSend: function () {
@@ -100,7 +92,6 @@ $(document).ready(function () {
 
 
     $(document).on("click", ".row-destroy", function () {
-
 
         if (window.confirm("Wirklich löschen ?")) {
             if (window.confirm("Ohne Wiederherstellmöglichkeit ?")) {
@@ -119,10 +110,7 @@ $(document).ready(function () {
                             $(".rows-info").removeClass();
                             $("#rows-info").addClass("rows-info rows-info-success");
                             $("#rows-info").html("Row destroyed");
-
-                            secondLoad = true;
-
-                            fetchRows();
+                            $("#row-" + id).slideToggle();
                         } else {
                             $("#rows-info").css("display", "block");
                             $(".rows-info").removeClass();
@@ -210,12 +198,13 @@ $(document).ready(function () {
         fetchRows();
     });
 
-    $(document).on("click", ".example-delete", function () {
+    $(document).on("click", ".row-delete", function () {
 
         if (window.confirm("Wirklich löschen ?")) {
 
             let id = $(this).attr("value");
             let active = $(this).attr("act");
+            let deleteOn = $('#row-delete-' + id).text();
 
             $.ajax({
                 url: "components/" + view + "/data/delete.php",
@@ -230,12 +219,20 @@ $(document).ready(function () {
                         $(".rows-info").removeClass();
                         $("#rows-info").addClass("rows-info rows-info-success");
                         $("#rows-info").html("GELÖSCHT !");
-                        fetchRows();
+
+                        if (deleteOn === "on") {
+                            $('#row-delete-' + id).text("off");
+                        } else {
+                            $('#row-delete-' + id).text("on");
+                        }
+
                     } else {
+
                         $("#rows-info").css("display", "block");
                         $(".rows-info").removeClass();
                         $("#rows-info").addClass("rows-info rows-info-error");
                         $("#rows-info").html("NICHT gelöscht !");
+
                     }
                 }
             });
@@ -303,6 +300,7 @@ $(document).ready(function () {
             url: "components/" + view + "/data/turnCate.php",
             success: function (data) {
                 console.log(view + "seeds generated");
+                secondLoad = true;
                 fetchRows();
             }
         });

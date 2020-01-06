@@ -11,8 +11,6 @@ if (isset($_POST["id"])) {
     $id = $_POST['id'];
     $active = $_POST['active'];
 
-//    echo ":::-:::" . $_POST['active'] . " !!!";
-
     if($active == "0"){
         $active = 1;
     }else{
