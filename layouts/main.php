@@ -27,13 +27,14 @@
 
         <div class="black-line">
             <div class="login"><span class="btns" data-toggle="modal" data-target="#exampleModal">LOGIN</span></div>
+            <div class="theme-style"><span class="btns">Hell</span></div>
             <div class="username" data-toggle="collapse" data-target="#black-line-contact">Artem Sawatzki</div>
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
                 <div>Email: artsawatzki@gmail.com</div>
                 <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>
             </div>
-            <div class="theme-style"><span class="btns">Hell</span></div>
+
         </div>
 
 

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let firstLoad = true;
+    let secondLoad = false;
 
     let url = document.location.href;
     let arrView = url.split("=");
@@ -11,7 +11,9 @@ $(document).ready(function () {
     let rowsCount = 5;
 
     $(window).scroll(function () {
+
         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100 && !inProgress) {
+
             fetchRows();
         }
     });
@@ -30,6 +32,10 @@ $(document).ready(function () {
             view = "example";
         }
 
+        if (secondLoad) {
+            startFrom = 0;
+        }
+
         $.ajax({
             url: "components/" + view + "/data/index.php",
             type: "post",
@@ -46,7 +52,6 @@ $(document).ready(function () {
 
                     $.each(data, function (index, row) {
 
-                        // out += '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Launch demo modal </button>';
                         out += "<div class='row' id='row-" + row.id + "'>";
                         out += "<div class='row-value'>";
                         out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
@@ -73,12 +78,16 @@ $(document).ready(function () {
 
                     });
 
-
-                    $(".rows").append(nl2br(out));
-
-
                     inProgress = false;
-                    startFrom += 5;
+
+                    if (!secondLoad) {
+                        $(".rows").append(nl2br(out));
+
+                        startFrom += 5;
+                    } else {
+                        $(".rows").html(nl2br(out));
+                    }
+                    secondLoad = false;
                 }
             },
             beforeSend: function () {
@@ -88,6 +97,48 @@ $(document).ready(function () {
     }
 
     fetchRows();
+
+
+    $(document).on("click", ".row-destroy", function () {
+
+
+        if (window.confirm("Wirklich löschen ?")) {
+            if (window.confirm("Ohne Wiederherstellmöglichkeit ?")) {
+
+                let id = $(this).attr("value");
+
+                $.ajax({
+                    url: "components/" + view + "/data/destroy.php",
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        if (data) {
+                            $("#rows-info").css("display", "block");
+                            $(".rows-info").removeClass();
+                            $("#rows-info").addClass("rows-info rows-info-success");
+                            $("#rows-info").html("Row destroyed");
+
+                            secondLoad = true;
+
+                            fetchRows();
+                        } else {
+                            $("#rows-info").css("display", "block");
+                            $(".rows-info").removeClass();
+                            $("#rows-info").addClass("rows-info rows-info-error");
+                            $("#rows-info").html("NICHT gelöscht !");
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+        } else {
+            return false
+        }
+    });
+
 
     $(document).on("click", ".row-edit", function () {
         let id = $(this).attr("value");
@@ -137,7 +188,7 @@ $(document).ready(function () {
 
                 out += "<h2 class='text-light text-center'>" + data.title + "</h2>";
                 out += "<hr class='hr-light'>";
-                out +=  "<div class='text-light text-center mb-3 p-2'>" + data.description + "</div>";
+                out += "<div class='text-light text-center mb-3 p-2'>" + data.description + "</div>";
 
                 out += "<button type='button' class='btns' data-dismiss='modal'>Close</button>";
                 out += "</div>";
@@ -194,42 +245,6 @@ $(document).ready(function () {
             return false;
         }
 
-    });
-
-    $(document).on("click", ".row-destroy", function () {
-
-        if (window.confirm("Wirklich löschen ?")) {
-            if (window.confirm("Ohne Wiederherstellmöglichkeit ?")) {
-
-                let id = $(this).attr("value");
-
-                $.ajax({
-                    url: "components/" + view + "/data/destroy.php",
-                    type: "post",
-                    data: {
-                        id: id
-                    },
-                    success: function (data) {
-                        if (data) {
-                            $("#rows-info").css("display", "block");
-                            $(".rows-info").removeClass();
-                            $("#rows-info").addClass("rows-info rows-info-success");
-                            $("#rows-info").html("Row destroyed");
-                            fetchRows();
-                        } else {
-                            $("#rows-info").css("display", "block");
-                            $(".rows-info").removeClass();
-                            $("#rows-info").addClass("rows-info rows-info-error");
-                            $("#rows-info").html("NICHT gelöscht !");
-                        }
-                    }
-                });
-            } else {
-                return false;
-            }
-        } else {
-            return false
-        }
     });
 
     $(document).on("click", ".rows-info", function () {
