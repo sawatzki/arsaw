@@ -22,7 +22,7 @@ $(document).ready(function () {
         if (typeof str === 'undefined' || str === null) {
             return '';
         }
-        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+        let breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
         return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
     }
 
@@ -30,6 +30,10 @@ $(document).ready(function () {
 
         if (!view) {
             view = "example";
+        }
+
+        if(secondLoad){
+            startFrom = 0;
         }
 
         $.ajax({
@@ -74,8 +78,12 @@ $(document).ready(function () {
 
                     });
 
-                    $(".rows").append(nl2br(out));
-
+                    if(secondLoad){
+                        $(".rows").html(out);
+                    }else{
+                        $(".rows").append(out);
+                    }
+                    secondLoad = false
                     inProgress = false;
 
                     startFrom += 5;
@@ -89,6 +97,37 @@ $(document).ready(function () {
     }
 
     fetchRows();
+
+    $(document).on("click", "#row-save", function () {
+
+        let title = $("[name='title']").val().trim();
+        let description = $("[name='description']").val().trim();
+
+        $.ajax({
+            url: "components/" + view + "/data/insert.php",
+            type: "post",
+            data: {
+                title: title,
+                description: description
+            },
+            success: function (data) {
+                if (data) {
+                    $("#rows-info").css("display", "block");
+                    $(".rows-info").removeClass();
+                    $("#rows-info").addClass("rows-info rows-info-success");
+                    $("#rows-info").html("Gespeichert");
+                    secondLoad = true;
+                    fetchRows();
+                } else {
+                    $("#rows-info").css("display", "block");
+                    $(".rows-info").removeClass();
+                    $("#rows-info").addClass("rows-info rows-info-error");
+                    $("#rows-info").html("NICHT gespeichert !");
+                }
+            }
+        });
+
+    });
 
 
     $(document).on("click", ".row-destroy", function () {
@@ -250,36 +289,6 @@ $(document).ready(function () {
 
     $(document).on("click", ".row-new", function () {
         $(".row-new-form").slideToggle();
-    });
-
-    $(document).on("click", "#row-save", function () {
-
-        let title = $("[name='title']").val();
-        let description = $("[name='description']").val();
-
-        $.ajax({
-            url: "components/" + view + "/data/insert.php",
-            type: "post",
-            data: {
-                title: title,
-                description: description
-            },
-            success: function (data) {
-                if (data) {
-                    $("#rows-info").css("display", "block");
-                    $(".rows-info").removeClass();
-                    $("#rows-info").addClass("rows-info rows-info-success");
-                    $("#rows-info").html("Gespeichert");
-                    fetchRows();
-                } else {
-                    $("#rows-info").css("display", "block");
-                    $(".rows-info").removeClass();
-                    $("#rows-info").addClass("rows-info rows-info-error");
-                    $("#rows-info").html("NICHT gespeichert !");
-                }
-            }
-        });
-
     });
 
     $(document).on("click", ".seeds", function () {
