@@ -88,6 +88,8 @@ $(document).ready(function () {
 
                     startFrom += 5;
 
+                }else{
+                    $(".rows").html("No data");
                 }
             },
             beforeSend: function () {
@@ -297,6 +299,7 @@ $(document).ready(function () {
             url: "components/" + view + "/data/seeds.php",
             success: function (data) {
                 console.log(view + "seeds generated");
+                secondLoad = true;
                 fetchRows();
             }
         });
