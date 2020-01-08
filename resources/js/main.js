@@ -56,6 +56,7 @@ $(document).on("click",".btn-login", function () {
 
     out += "<input type='text' name='login' placeholder='Login' value='User1'>";
     out += "<input type='text' name='password' placeholder='Password' value='1234567'>";
+    out += "<div class='login-message text-center'></div>"
 
     $(".modal-body").html(out);
 })
@@ -80,10 +81,27 @@ $(document).on("click", "#btn-login-check", function () {
                 // $(".modal-body").html("<div class='text-success'>OK !</div>");
                 // $("#btn-login-check").css("display", "none");
                 // $(".login").css("display", "none");
-                window.location.href = window.location.href;
+
+                if($(".login-message").css("display") === "block"){
+                    $(".login-message").slideToggle(function(){
+                        window.location.href = window.location.href;
+                    });
+                }else{
+                    window.location.href = window.location.href;
+                }
 
             }else{
-                $(".modal-body").html("<div class='text-error'>Login oder password ist falsch !</div>");
+
+                $(".login-message").html("<div class='text-error'>Login oder password ist falsch !</div>");
+
+                if($(".login-message").css("display") === "none"){
+                    $(".login-message").slideToggle();
+                }
+                //
+                // if ($(".login-message").attr("display") == "none") {
+                //
+                // }
+                // $(".modal-body").html("<div class='text-error'>Login oder password ist falsch !</div>");
                 // $("#btn-login-check").css("display", "none");
             }
         }

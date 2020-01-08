@@ -217,17 +217,24 @@ a.text-wheat:focus, a.text-wheat:hover {
 }
 
 .login {
+    width: 100px;
     float: left;
     padding: 0 10px;
 }
 
 .theme-style {
+    width: 100px;
     float: right;
     padding: 0 10px;
 }
 
 .modal-body > input{
     width: 49.5%;
+}
+
+.login-message{
+    padding-top: 10px;
+    display: none;
 }
 
 @media (max-width: 992px) {

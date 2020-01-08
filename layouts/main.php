@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ARTEM SAWATZKI</title>
+    <title>CMS</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/css/style.css">
@@ -34,7 +34,9 @@
                 </div>
             <?php endif; ?>
             <div class="theme-style"><span class="btns">HELL</span></div>
-            <div class="username" data-toggle="collapse" data-target="#black-line-contact">Artem Sawatzki</div>
+            <div class="username" data-toggle="collapse" data-target="#black-line-contact">
+                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] : "NONE"; ?></div>
+            </div>
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
                 <div>Email: artsawatzki@gmail.com</div>
