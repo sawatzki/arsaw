@@ -3,12 +3,13 @@
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '..') . $ds;
 
-require_once "{$base_dir}User.php";
+require_once "{$base_dir}Login.php";
 
-$user = new Login();
+$login = new Login();
 
 $data['login'] = $_POST['login'];
 $data['password'] = $_POST['password'];
 
-$result = $user->getUser($data);
-echo json_encode($result);
+$user = $login->checkUser($data);
+
+echo json_encode($user);

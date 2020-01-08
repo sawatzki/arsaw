@@ -8,10 +8,10 @@ class Login extends BaseModel
 {
     public $data;
 
-    public function getUser($data){
+    public function checkUser($data){
         $this->data = $data;
 
-        $query = "SELECT * FROM users WHERE login = '$data[login]'";
+        $query = "SELECT login AS logged FROM users WHERE login = '$data[login]' AND password = '$data[password]'";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

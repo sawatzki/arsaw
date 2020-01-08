@@ -28,6 +28,8 @@ $(document).ready(function () {
 
     function fetchRows() {
 
+        console.log(document.cookie);
+
         if (!view) {
             view = "example";
         }
@@ -311,7 +313,7 @@ $(document).ready(function () {
         $.ajax({
             url: "components/" + view + "/data/turnCate.php",
             success: function (data) {
-                console.log(view + "seeds generated");
+                console.log("clear table " + view);
                 secondLoad = true;
                 fetchRows();
             }

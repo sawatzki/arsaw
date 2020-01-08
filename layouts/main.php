@@ -23,20 +23,24 @@
 <div id="wrapper">
     <header class="fixed-top">
 
-
-
         <div class="black-line">
-            <div class="login"><span class="btns" data-toggle="modal" data-target="#exampleModal">LOGIN</span></div>
-            <div class="theme-style"><span class="btns">Hell</span></div>
+            <?php if (isset($_COOKIE['logged'])): ?>
+                <div class="login">
+                    <span class="btns btn-logout">LOGOUT</span>
+                </div>
+            <?php else: ?>
+                <div class="login">
+                    <span class="btns btn-login" data-toggle="modal" data-target="#loginModal">LOGIN</span>
+                </div>
+            <?php endif; ?>
+            <div class="theme-style"><span class="btns">HELL</span></div>
             <div class="username" data-toggle="collapse" data-target="#black-line-contact">Artem Sawatzki</div>
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
                 <div>Email: artsawatzki@gmail.com</div>
                 <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>
             </div>
-
         </div>
-
 
         <nav class="navbar navbar-expand-lg as-bg-rgba-dark">
 
@@ -48,7 +52,6 @@
                     <hr>
                 </span>
             </button>
-            <!--            <div class="top-view"><span>--><? //= $component; ?><!--</span></div>-->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
@@ -75,7 +78,8 @@
     </header>
 
     <!-- LOGIN modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
