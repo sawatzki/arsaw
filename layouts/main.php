@@ -60,10 +60,10 @@
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">MUSTER</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "todo" ? "menu-active" : "" ?>"
-                           href="index.php?component=todo">AUFGABEN</a>
-                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link col-md-12 pr-3 text-wheat --><?//= $component === "todo" ? "menu-active" : "" ?><!--"-->
+<!--                           href="index.php?component=todo">AUFGABEN</a>-->
+<!--                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "---" ? "menu-active" : "" ?>"
                            href="#">TERMINE</a>

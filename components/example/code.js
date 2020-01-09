@@ -28,8 +28,6 @@ $(document).ready(function () {
 
     function fetchRows() {
 
-        console.log(document.cookie);
-
         if (!view) {
             view = "example";
         }
@@ -93,8 +91,7 @@ $(document).ready(function () {
                     startFrom += 5;
 
                 } else {
-                    if (secondLoad) {
-
+                    if($("#root").height() < 25){
                         $(".rows").html("No data");
                     }
                 }
@@ -159,7 +156,7 @@ $(document).ready(function () {
                             $("#rows-info").addClass("rows-info rows-info-success");
                             $("#rows-info").html("Row destroyed");
                             $("#row-" + id).slideToggle(function () {
-                                if($(window).height() > $("#view").height()){
+                                if ($(window).height() > $("#view").height()) {
                                     fetchRows();
                                 }
                             });
@@ -319,14 +316,22 @@ $(document).ready(function () {
 
     $(document).on("click", ".turn-cate", function () {
 
-        $.ajax({
-            url: "components/" + view + "/data/turnCate.php",
-            success: function (data) {
-                console.log("clear table " + view);
-                secondLoad = true;
-                fetchRows();
+        if($(".rows").height() > 30) {
+
+            if (window.confirm("All records DELETE ?")) {
+                $.ajax({
+                    url: "components/" + view + "/data/turnCate.php",
+                    success: function (data) {
+                        alert("All example records was deleted!");
+                        window.location.href = window.location.href;
+                    }
+                });
+            } else {
+                return false;
             }
-        });
+
+        }
+
 
     });
 
