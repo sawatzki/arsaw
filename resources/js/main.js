@@ -108,10 +108,9 @@ $(document).on("click", "#choice-login", function () {
         $("#btn-registration").slideToggle(function () {
             $("#btn-login-check").slideToggle();
         });
-
     }
-
 });
+
 $(document).on("click", "#choice-registration", function () {
 
     if ($("#modal-registration-form").css("display") === "none") {
@@ -122,10 +121,9 @@ $(document).on("click", "#choice-registration", function () {
         $("#modal-registration-form").slideToggle();
         $("#modal-login-form").slideToggle();
 
-        $("#btn-login-check").slideToggle(function(){
+        $("#btn-login-check").slideToggle(function () {
             $("#btn-registration").slideToggle();
         });
-
 
     }
 
@@ -152,10 +150,8 @@ $(document).on("click", "#btn-login-check", function () {
         success: function (data) {
 
             if (data) {
+
                 setCookie("logged", data.logged, "7");
-                // $(".modal-body").html("<div class='text-success'>OK !</div>");
-                // $("#btn-login-check").css("display", "none");
-                // $(".login").css("display", "none");
 
                 if ($(".login-message").css("display") === "block") {
                     $(".login-message").slideToggle(function () {
@@ -166,18 +162,11 @@ $(document).on("click", "#btn-login-check", function () {
                 }
 
             } else {
-
                 $(".login-message").html("<div class='text-error'>Login oder password ist falsch !</div>");
 
                 if ($(".login-message").css("display") === "none") {
                     $(".login-message").slideToggle();
                 }
-                //
-                // if ($(".login-message").attr("display") == "none") {
-                //
-                // }
-                // $(".modal-body").html("<div class='text-error'>Login oder password ist falsch !</div>");
-                // $("#btn-login-check").css("display", "none");
             }
         }
     });

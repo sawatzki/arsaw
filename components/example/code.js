@@ -34,7 +34,7 @@ $(document).ready(function () {
             view = "example";
         }
 
-        if(secondLoad){
+        if (secondLoad) {
             startFrom = 0;
         }
 
@@ -80,9 +80,11 @@ $(document).ready(function () {
 
                     });
 
-                    if(secondLoad){
+                    if (secondLoad) {
+
                         $(".rows").html(out);
-                    }else{
+
+                    } else {
                         $(".rows").append(out);
                     }
                     secondLoad = false
@@ -90,8 +92,11 @@ $(document).ready(function () {
 
                     startFrom += 5;
 
-                }else{
-                    $(".rows").html("No data");
+                } else {
+                    if (secondLoad) {
+
+                        $(".rows").html("No data");
+                    }
                 }
             },
             beforeSend: function () {
@@ -153,7 +158,11 @@ $(document).ready(function () {
                             $(".rows-info").removeClass();
                             $("#rows-info").addClass("rows-info rows-info-success");
                             $("#rows-info").html("Row destroyed");
-                            $("#row-" + id).slideToggle();
+                            $("#row-" + id).slideToggle(function () {
+                                if($(window).height() > $("#view").height()){
+                                    fetchRows();
+                                }
+                            });
                         } else {
                             $("#rows-info").css("display", "block");
                             $(".rows-info").removeClass();

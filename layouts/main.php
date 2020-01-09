@@ -79,7 +79,7 @@
 
     </header>
 
-    <!-- LOGIN modal -->
+    <!-- LOGIN REGISTRATION modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div id="modal-wrapper-login-registration" class="modal-dialog" role="document">
@@ -105,7 +105,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <!--<button id="btn-login-registration" type="button" class="btns" data-toggle="modal" data-target="#exampleModal">Registrieren</button>-->
                     <button id="btn-login-close" type="button" class="btns" data-dismiss="modal">Close</button>
                     <button id="btn-registration" type="button" class="btns">Registrieren</button>
                     <button id="btn-login-check" type="button" class="btns">Anmelden</button>
@@ -113,29 +112,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- registration modal -->
-    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
-    <!--         aria-hidden="true">-->
-    <!--        <div class="modal-dialog" role="document">-->
-    <!--            <div class="modal-content">-->
-    <!--                <div class="modal-header">-->
-    <!--                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
-    <!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-    <!--                        <span aria-hidden="true">&times;</span>-->
-    <!--                    </button>-->
-    <!--                </div>-->
-    <!--                <div class="modal-body">-->
-    <!---->
-    <!--                </div>-->
-    <!--                <div class="modal-footer">-->
-    <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-    <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
 
     <div id="rows-info"></div>
     <main>
