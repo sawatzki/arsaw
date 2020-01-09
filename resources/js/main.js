@@ -42,24 +42,99 @@ if ($(document).width() < 1183) {
     });
 }
 
+// registration
+// $(document).on("click", "#btn-login-registration", function(){
+//     let title = $("[name='title']").val().trim();
+//     let description = $("[name='description']").val().trim();
+//
+//     $.ajax({
+//         url: "core/login/data/registration.php",
+//         type: "post",
+//         data: {
+//             title: title,
+//             description: description
+//         },
+//         success: function (data) {
+//             if (data) {
+//                 $("#rows-info").css("display", "block");
+//                 $(".rows-info").removeClass();
+//                 $("#rows-info").addClass("rows-info rows-info-success");
+//                 $("#rows-info").html("Gespeichert");
+//                 secondLoad = true;
+//                 fetchRows();
+//             } else {
+//                 $("#rows-info").css("display", "block");
+//                 $(".rows-info").removeClass();
+//                 $("#rows-info").addClass("rows-info rows-info-error");
+//                 $("#rows-info").html("NICHT gespeichert !");
+//             }
+//         }
+//     });
+// });
+
+
 // login
 $(document).on("click", ".btn-logout", function () {
     deleteCookie("logged");
     window.location.href = window.location.href;
 });
 
-
-$(document).on("click",".btn-login", function () {
+$(document).on("click", ".btn-login", function () {
     $("#btn-login-check").css("display", "block");
 
     let out = "";
 
+
+    out += "<div id='modal-login-form'>";
     out += "<input type='text' name='login' placeholder='Login' value='User1'>";
     out += "<input type='text' name='password' placeholder='Password' value='1234567'>";
     out += "<div class='login-message text-center'></div>"
+    out += "</div>";
 
-    $(".modal-body").html(out);
-})
+    $("#modal-body-form").html(out);
+});
+
+
+$(document).on("click", "#choice-login", function () {
+
+    if ($("#modal-login-form").css("display") === "none") {
+
+        $("#choice-login").css("color", "white");
+        $("#choice-registration").css("color", "gray");
+
+        $("#modal-login-form").slideToggle();
+        $("#modal-registration-form").slideToggle();
+
+        $("#btn-registration").slideToggle(function () {
+            $("#btn-login-check").slideToggle();
+        });
+
+    }
+
+});
+$(document).on("click", "#choice-registration", function () {
+
+    if ($("#modal-registration-form").css("display") === "none") {
+
+        $("#choice-login").css("color", "gray");
+        $("#choice-registration").css("color", "white");
+
+        $("#modal-registration-form").slideToggle();
+        $("#modal-login-form").slideToggle();
+
+        $("#btn-login-check").slideToggle(function(){
+            $("#btn-registration").slideToggle();
+        });
+
+
+    }
+
+});
+
+$(document).on("click", "#btn-registration", function () {
+    let registerLogin = $("[name='register-login']").val();
+    let registerPassword = $("[name='register-password']").val();
+});
 
 $(document).on("click", "#btn-login-check", function () {
 
@@ -82,19 +157,19 @@ $(document).on("click", "#btn-login-check", function () {
                 // $("#btn-login-check").css("display", "none");
                 // $(".login").css("display", "none");
 
-                if($(".login-message").css("display") === "block"){
-                    $(".login-message").slideToggle(function(){
+                if ($(".login-message").css("display") === "block") {
+                    $(".login-message").slideToggle(function () {
                         window.location.href = window.location.href;
                     });
-                }else{
+                } else {
                     window.location.href = window.location.href;
                 }
 
-            }else{
+            } else {
 
                 $(".login-message").html("<div class='text-error'>Login oder password ist falsch !</div>");
 
-                if($(".login-message").css("display") === "none"){
+                if ($(".login-message").css("display") === "none") {
                     $(".login-message").slideToggle();
                 }
                 //

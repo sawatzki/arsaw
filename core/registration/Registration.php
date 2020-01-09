@@ -4,7 +4,7 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '..' . $ds . '..') . $ds;
 
 require_once "{$base_dir}BaseModel.php";
 
-class Login extends BaseModel
+class Registration extends BaseModel
 {
     public $data;
 
@@ -16,21 +16,6 @@ class Login extends BaseModel
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $data = $stmt->fetch();
-
-        return $data;
-    }
-
-    public function registerUser($data){
-        $this->data = $data;
-
-        $query = "INSERT INTO users (login, password) VALUES ('$data[login]', $data[password])";
-
-        if($stmt = $this->conn->exec($query)){
-            return true;
-        }else{
-            return false;
-        }
-
 
         return $data;
     }

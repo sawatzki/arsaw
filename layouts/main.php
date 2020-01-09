@@ -82,25 +82,60 @@
     <!-- LOGIN modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div id="modal-wrapper-login-registration" class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-light" id="exampleModalLabel">ANMELDEN</h5>
+                    <h5 class="login-modal-title" id="choice-login">ANMELDEN</h5>
+                    <h5 class="login-modal-title" id="choice-registration">REGISTRIEREN</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" name="login" placeholder="Login" value="User1">
-                    <input type="text" name="password" placeholder="Password" value="1234567">
+                    <div id="modal-registration-form">
+                        <input type="text" name="register-login" placeholder="Login">
+                        <input type="password" name="register-password" placeholder="Password">
+                        <input type="password" name="register-password-check" placeholder="Password widerholen">
+                        <div class='registration-message text-center'></div>
+                    </div>
+                    <div id="modal-login-form">
+                        <input type="text" name="login" placeholder="Login" value="User1">
+                        <input type="text" name="password" placeholder="Password" value="1234567">
+                        <div class='login-message text-center'></div>
+                    </div>
                 </div>
                 <div class="modal-footer">
+                    <!--<button id="btn-login-registration" type="button" class="btns" data-toggle="modal" data-target="#exampleModal">Registrieren</button>-->
                     <button id="btn-login-close" type="button" class="btns" data-dismiss="modal">Close</button>
+                    <button id="btn-registration" type="button" class="btns">Registrieren</button>
                     <button id="btn-login-check" type="button" class="btns">Anmelden</button>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- registration modal -->
+    <!--    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
+    <!--         aria-hidden="true">-->
+    <!--        <div class="modal-dialog" role="document">-->
+    <!--            <div class="modal-content">-->
+    <!--                <div class="modal-header">-->
+    <!--                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+    <!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+    <!--                        <span aria-hidden="true">&times;</span>-->
+    <!--                    </button>-->
+    <!--                </div>-->
+    <!--                <div class="modal-body">-->
+    <!---->
+    <!--                </div>-->
+    <!--                <div class="modal-footer">-->
+    <!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+    <!--                    <button type="button" class="btn btn-primary">Save changes</button>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <div id="rows-info"></div>
     <main>

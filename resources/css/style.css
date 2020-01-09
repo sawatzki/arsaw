@@ -228,7 +228,54 @@ a.text-wheat:focus, a.text-wheat:hover {
     padding: 0 10px;
 }
 
-.modal-body > input{
+#choice-login{
+    color: white;
+}
+
+#choice-registration{
+    color: gray;
+}
+
+.login-modal-title:hover{
+    text-shadow: 0 0 5px;
+}
+.login-modal-title{
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+#btn-login-close{
+    display: none;
+}
+
+.close{
+    color: white;
+}
+
+.close:hover span{
+    color: white;
+}
+
+#btn-registration,
+#btn-login-check{
+    width: 100%;
+    margin: 0 auto;
+}
+
+#modal-registration-form,
+#btn-registration
+{
+    display: none;
+}
+
+.modal-body > div > input{
+    width: 100%;
+    padding: 3px 7px;
+    background: rgba(0,0,0,0.3);
+    color: white;
+}
+
+#modal-login-form > input{
     width: 49.5%;
 }
 
