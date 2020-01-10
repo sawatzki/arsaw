@@ -11,7 +11,12 @@ $data['login'] = $_POST['login'];
 $data['password'] = $_POST['password'];
 $data['passwordCheck'] = $_POST['passwordCheck'];
 
-//print_r($data);
+$user = $login->isLoginExist($data);
 
-$user = $login->registerUser($data);
+if($user){
+    $data = "User exist!";
+}else{
+    $data = $login->registerUser($data);
+}
+
 echo json_encode($user);

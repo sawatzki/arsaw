@@ -83,7 +83,7 @@ $(document).on("click", ".btn-login", function () {
 
     $("#btn-login-check").css("display", "block");
 
-    if( $("#btn-registration").css("display") === "block" ){
+    if ($("#btn-registration").css("display") === "block") {
         $("#btn-login-check").css("display", "none");
     }
 
@@ -140,19 +140,30 @@ $(document).on("click", "#btn-registration", function () {
     let registerPassword = $("[name='register-password']").val();
     let registerPasswordCheck = $("[name='register-password-check']").val();
 
-    $.ajax({
-        url: "core/login/data/registerUser.php",
-        dataType: "json",
-        type: "post",
-        data: {
-            login: registerLogin,
-            password: registerPassword,
-            passwordCheck: registerPasswordCheck
-        },
-        success: function(data){
+    if (registerPassword === registerPasswordCheck) {
 
-        }
-    });
+
+        $.ajax({
+            url: "core/login/data/registerUser.php",
+            dataType: "json",
+            type: "post",
+            data: {
+                login: registerLogin,
+                password: registerPassword,
+                passwordCheck: registerPasswordCheck
+            },
+            success: function (data) {
+                if(data){
+                    alert("Login is not free");
+                }else {
+                    alert("SUCCESS!");
+                }
+            }
+        });
+
+    }else{
+        alert("passwörter sollen gleich sein !");
+    }
 
 });
 
