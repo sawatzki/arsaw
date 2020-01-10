@@ -21,16 +21,17 @@ class Login extends BaseModel
     }
 
     public function registerUser($data){
-        $this->data = $data;
 
-        $query = "INSERT INTO users (login, password) VALUES ('$data[login]', $data[password])";
+        $this->data = $data;
+        $now = date("Y-m-d H:i:s");
+
+        $query = "INSERT INTO users (login, password, role, created) VALUES ('$data[login]', '$data[password]', 'User', '$now')";
 
         if($stmt = $this->conn->exec($query)){
             return true;
         }else{
             return false;
         }
-
 
         return $data;
     }

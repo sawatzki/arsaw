@@ -130,8 +130,25 @@ $(document).on("click", "#choice-registration", function () {
 });
 
 $(document).on("click", "#btn-registration", function () {
+
     let registerLogin = $("[name='register-login']").val();
     let registerPassword = $("[name='register-password']").val();
+    let registerPasswordCheck = $("[name='register-password-check']").val();
+
+    $.ajax({
+        url: "core/login/data/registerUser.php",
+        dataType: "json",
+        type: "post",
+        data: {
+            login: registerLogin,
+            password: registerPassword,
+            passwordCheck: registerPasswordCheck
+        },
+        success: function(data){
+
+        }
+    });
+
 });
 
 $(document).on("click", "#btn-login-check", function () {
