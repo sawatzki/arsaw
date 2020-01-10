@@ -80,10 +80,14 @@ $(document).on("click", ".btn-logout", function () {
 });
 
 $(document).on("click", ".btn-login", function () {
+
     $("#btn-login-check").css("display", "block");
 
-    let out = "";
+    if( $("#btn-registration").css("display") === "block" ){
+        $("#btn-login-check").css("display", "none");
+    }
 
+    let out = "";
 
     out += "<div id='modal-login-form'>";
     out += "<input type='text' name='login' placeholder='Login' value='User1'>";
@@ -92,6 +96,7 @@ $(document).on("click", ".btn-login", function () {
     out += "</div>";
 
     $("#modal-body-form").html(out);
+
 });
 
 

@@ -273,13 +273,19 @@ a.text-wheat:focus, a.text-wheat:hover {
     color: white;
 }
 
-#modal-login-form > input{
-    width: 49.5%;
-}
+/*#modal-login-form > input{*/
+/*    width: 49.5%;*/
+/*}*/
 
 .login-message{
     padding-top: 10px;
     display: none;
+}
+#navbarNav .navbar-nav .nav-link{
+    padding: 0.5rem 1rem;
+}
+@media (min-width: 993px) {
+
 }
 
 @media (max-width: 992px) {
