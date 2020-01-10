@@ -305,7 +305,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: "components/" + view + "/data/seeds.php",
-            success: function (data) {
+            success: function () {
                 console.log(view + "seeds generated");
                 secondLoad = true;
                 fetchRows();
@@ -321,7 +321,7 @@ $(document).ready(function () {
             if (window.confirm("All records DELETE ?")) {
                 $.ajax({
                     url: "components/" + view + "/data/turnCate.php",
-                    success: function (data) {
+                    success: function () {
                         alert("All example records was deleted!");
                         window.location.href = window.location.href;
                     }

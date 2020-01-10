@@ -9,16 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/css/style.css">
-    <link rel="stylesheet" href="components/<?= $component ?>/style.css">
+    <?= file_exists("components/<?= $component ?>/style.css") ? "<link rel='stylesheet' href='components/$component/style.css'>" : "" ?>
     <style>
         body {
             background: url("resources/images/bg_code.jpg") center center no-repeat fixed;
             background-size: cover;
         }
     </style>
-
 </head>
-
 <body>
 <div id="wrapper">
     <header class="fixed-top">
@@ -35,7 +33,7 @@
             <?php endif; ?>
             <div class="theme-style"><span class="btns">HELL</span></div>
             <div class="username" data-toggle="collapse" data-target="#black-line-contact">
-                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] : "NONE"; ?></div>
+                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] : "Gust"; ?></div>
             </div>
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
@@ -49,9 +47,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span id="menu-top-mobile-icon">
-                    <hr>
-                    <hr>
-                    <hr>
+                    <hr><hr><hr>
                 </span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -60,17 +56,13 @@
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">MUSTER</a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link col-md-12 pr-3 text-wheat --><?//= $component === "todo" ? "menu-active" : "" ?><!--"-->
-<!--                           href="index.php?component=todo">AUFGABEN</a>-->
-<!--                    </li>-->
                     <li class="nav-item">
-                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "---" ? "menu-active" : "" ?>"
-                           href="#">TERMINE</a>
+                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "appointment" ? "menu-active" : "" ?>"
+                           href="index.php?component=appointment">TERMINE</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "---" ? "menu-active" : "" ?>"
-                           href="#">KONTAKT</a>
+                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "contacts" ? "menu-active" : "" ?>"
+                           href="index.php?component=contacts">KONTAKT</a>
                     </li>
                 </ul>
             </div>
@@ -115,7 +107,9 @@
 
     <div id="rows-info"></div>
     <main>
-        <div id="view"><?php require_once "components/$component/controller.php"; ?></div>
+        <div id="view">
+            <?php file_exists("components/$component/controller.php") ? require_once "components/$component/controller.php" : require_once "no_component.php"; ?>
+        </div>
     </main>
 
     <footer>
@@ -128,7 +122,7 @@
             </div>
         </div>
         <div class="dark-line">
-            <h3>ARTEM SAWATZKI</h3>
+            <div class="copy-right">© 2020 Artem Sawatzki All Rights Reserved</div>
         </div>
     </footer>
 
@@ -143,7 +137,7 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="resources/js/main.js"></script>
-<script src="./components/<?= $component ?>/code.js"></script>
+<?= file_exists("components/$component/controller.php") ? "<script src='./components/$component/code.js'></script>" : "" ?>
 </body>
 
 </html>

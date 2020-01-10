@@ -7,18 +7,16 @@ html, body, #wrapper {
     height: 100%;
 }
 
+.dark-line > .copy-right{
+    text-align: center;
+}
 
 .dark-line {
     text-align: center;
-    color: wheat;
+    color: white;
     padding: 0.5em 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     overflow: hidden;
-}
-
-.dark-line h3 {
-    float: right;
-    margin-right: 10px;
 }
 
 #wrapper {
