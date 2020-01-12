@@ -71,11 +71,12 @@ $(document).ready(function () {
                                 if (role === "root" || role === "superadmin" || role === "admin" || role === "moderator") {
 
                                     out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
-                                    if (row.active === 1) {
+                                    if (row.active == 1) {
                                         out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
                                     } else {
                                         out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
                                     }
+
                                     if (role === "root" || role === "superadmin") {
                                         out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
                                     }
