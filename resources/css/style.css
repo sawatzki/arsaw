@@ -277,10 +277,13 @@ a.text-wheat:focus, a.text-wheat:hover {
 /*    width: 49.5%;*/
 /*}*/
 
-.login-message{
+
+.login-message,
+.registration-message{
     padding-top: 10px;
     display: none;
 }
+
 #navbarNav .navbar-nav .nav-link{
     padding: 0.5rem 1rem;
 }

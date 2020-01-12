@@ -45,11 +45,9 @@ class Login extends BaseModel
         $this->data = $data;
         $now = date("Y-m-d H:i:s");
 
-        $query = "INSERT INTO users (login, password, role, created) VALUES ('$data[login]', '$data[password]', 'User', '$now')";
+        $query = "INSERT INTO users (login, password, role_id, created) VALUES ('$data[login]', '$data[password]', 5, '$now')";
 
         if ($stmt = $this->conn->exec($query)) {
-//            $this->userId = $this->conn->lastInsertId();
-//            return $this->userId;
             return true;
         } else {
             return false;

@@ -42,42 +42,7 @@ if ($(document).width() < 1183) {
     });
 }
 
-// registration
-// $(document).on("click", "#btn-login-registration", function(){
-//     let title = $("[name='title']").val().trim();
-//     let description = $("[name='description']").val().trim();
-//
-//     $.ajax({
-//         url: "core/login/data/registration.php",
-//         type: "post",
-//         data: {
-//             title: title,
-//             description: description
-//         },
-//         success: function (data) {
-//             if (data) {
-//                 $("#rows-info").css("display", "block");
-//                 $(".rows-info").removeClass();
-//                 $("#rows-info").addClass("rows-info rows-info-success");
-//                 $("#rows-info").html("Gespeichert");
-//                 secondLoad = true;
-//                 fetchRows();
-//             } else {
-//                 $("#rows-info").css("display", "block");
-//                 $(".rows-info").removeClass();
-//                 $("#rows-info").addClass("rows-info rows-info-error");
-//                 $("#rows-info").html("NICHT gespeichert !");
-//             }
-//         }
-//     });
-// });
-
-
 // login
-$(document).on("click", ".btn-logout", function () {
-    deleteCookie("logged");
-    window.location.href = window.location.href;
-});
 
 $(document).on("click", ".btn-login", function () {
 
@@ -142,7 +107,6 @@ $(document).on("click", "#btn-registration", function () {
 
     if (registerPassword === registerPasswordCheck) {
 
-
         $.ajax({
             url: "core/login/data/registerUser.php",
             dataType: "json",
@@ -153,20 +117,58 @@ $(document).on("click", "#btn-registration", function () {
                 passwordCheck: registerPasswordCheck
             },
             success: function (data) {
-                if(data){
-                    alert("Login is not free");
-                }else {
-                    alert("SUCCESS!");
+                if (data) {
+                    //user exist
+                    
+                    if($(".registration-message").css("display") === "block"){
+                        $(".registration-message").slideToggle(function () {
+                            $(".registration-message").html("<div class='text-error'>" + registerLogin + " bereits exestiert ! </div>");
+                        });
+                    }else{
+                        $(".registration-message").html("<div class='text-error'>" + registerLogin + " bereits exestiert ! </div>");
+                    }
+
+                    $(".registration-message").slideToggle();
+
+                } else {
+                    //user created
+
+                    if($(".registration-message").css("display") === "block"){
+                        $(".registration-message").slideToggle(function () {
+                            $(".registration-message").html("");
+                        });
+                    }
+
+
+                    if ($("#modal-login-form").css("display") === "none") {
+
+                        $(".login-message").html("<div class='text-success'>" + registerLogin + " ist regestriert. Willkommen ! </div>");
+
+                        $("[name='login']").val(registerLogin);
+                        $("[name='password']").val(registerPassword);
+
+                        $("#choice-login").css("color", "white");
+                        $("#choice-registration").css("color", "gray");
+
+                        $("#modal-login-form").slideToggle();
+                        $("#modal-registration-form").slideToggle();
+
+                        $("#btn-registration").slideToggle(function () {
+                            $("#btn-login-check").slideToggle(function () {
+                                $(".login-message").slideToggle();
+                            });
+                        });
+                    }
+
                 }
             }
         });
 
-    }else{
+    } else {
         alert("passwörter sollen gleich sein !");
     }
 
 });
-
 
 
 $(document).on("click", ".user-seeder", function () {
@@ -178,6 +180,12 @@ $(document).on("click", ".user-seeder", function () {
         }
     });
 
+});
+
+$(document).on("click", ".btn-logout", function () {
+    deleteCookie("logged");
+    deleteCookie("role");
+    window.location.href = window.location.href;
 });
 
 $(document).on("click", "#btn-login-check", function () {
@@ -198,6 +206,7 @@ $(document).on("click", "#btn-login-check", function () {
             if (data) {
 
                 setCookie("logged", data.logged, "7");
+                setCookie("role", data.role, "7");
 
                 if ($(".login-message").css("display") === "block") {
                     $(".login-message").slideToggle(function () {

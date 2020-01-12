@@ -33,7 +33,7 @@
             <?php endif; ?>
             <div class="theme-style"><span class="btns">HELL</span></div>
             <div class="username" data-toggle="collapse" data-target="#black-line-contact">
-                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] : "Gust"; ?></div>
+                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gust"; ?></div>
             </div>
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>

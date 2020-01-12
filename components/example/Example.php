@@ -11,7 +11,10 @@ class Example extends BaseModel
     {
         $data = null;
 
-        $query = "SELECT * FROM examples ORDER BY id DESC LIMIT $startFrom, $rowsCount";
+        $query = "SELECT e.id, e.title, e.description, e.active 
+            FROM examples AS e
+            ORDER BY id 
+            DESC LIMIT $startFrom, $rowsCount";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

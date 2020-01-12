@@ -2,6 +2,13 @@ $(document).ready(function () {
 
     let secondLoad = false;
 
+
+    let role = null;
+    if (getCookie("role")) {
+        role = getCookie("role")
+    }
+
+
     let url = document.location.href;
     let arrView = url.split("=");
     let view = arrView[1];
@@ -42,7 +49,7 @@ $(document).ready(function () {
             dataType: "json",
             data: {
                 startFrom: startFrom,
-                rowsCount: rowsCount,
+                rowsCount: rowsCount
             },
             success: function (data) {
 
@@ -52,31 +59,41 @@ $(document).ready(function () {
 
                     $.each(data, function (index, row) {
 
-                        out += "<div class='row' id='row-" + row.id + "'>";
-                        out += "<div class='row-value'>";
-                        out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
-                        out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
-                        out += "</div>";
-                        out += "<div class='cmd-group'>";
-                        out += "<button type='button' class='example-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
-                        out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
-                        if (row.active == 1) {
-                            out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
-                        } else {
-                            out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
+                            out += "<div class='row' id='row-" + row.id + "'>";
+                            out += "<div class='row-value'>";
+                            out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
+                            out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
+                            out += "</div>";
+                            out += "<div class='cmd-group'>";
+                            out += "<button type='button' class='example-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
+
+                            if (role) {
+                                if (role === "root" || role === "superadmin" || role === "admin" || role === "moderator") {
+
+                                    out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
+                                    if (row.active === 1) {
+                                        out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
+                                    } else {
+                                        out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
+                                    }
+                                    if (role === "root" || role === "superadmin") {
+                                        out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
+                                    }
+                                }
+
+                            }
+                            out += "</div>";
+
+                            out += "<div id='edit-row-" + row.id + "' style='display: none'>";
+                            out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
+                            out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
+                            out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
+                            out += "</div>";
+
+                            out += "</div>";
+
                         }
-                        out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
-                        out += "</div>";
-
-                        out += "<div id='edit-row-" + row.id + "' style='display: none'>";
-                        out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
-                        out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
-                        out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
-                        out += "</div>";
-
-                        out += "</div>";
-
-                    });
+                    );
 
                     if (secondLoad) {
 
@@ -91,15 +108,16 @@ $(document).ready(function () {
                     startFrom += 5;
 
                 } else {
-                    if($("#root").height() < 25){
+                    if ($("#root").height() < 25) {
                         $(".rows").html("No data");
                     }
                 }
             },
             beforeSend: function () {
-                inProgress = true;
-            }
-        });
+            inProgress = true;
+        }
+    })
+        ;
     }
 
     fetchRows();
@@ -316,7 +334,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".turn-cate", function () {
 
-        if($(".rows").height() > 30) {
+        if ($(".rows").height() > 30) {
 
             if (window.confirm("All records DELETE ?")) {
                 $.ajax({
@@ -336,4 +354,5 @@ $(document).ready(function () {
     });
 
 
-});
+})
+;
