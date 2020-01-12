@@ -301,12 +301,12 @@ $(document).ready(function () {
         $(".row-new-form").slideToggle();
     });
 
-    $(document).on("click", ".seeds", function () {
+    $(document).on("click", ".example-seeder", function () {
 
         $.ajax({
             url: "components/" + view + "/data/seeds.php",
             success: function () {
-                console.log(view + "seeds generated");
+                console.log(view + "seeder generated");
                 secondLoad = true;
                 fetchRows();
             }

@@ -167,6 +167,19 @@ $(document).on("click", "#btn-registration", function () {
 
 });
 
+
+
+$(document).on("click", ".user-seeder", function () {
+
+    $.ajax({
+        url: "core/login/data/userSeeder.php",
+        success: function () {
+            console.log("user seeder generated");
+        }
+    });
+
+});
+
 $(document).on("click", "#btn-login-check", function () {
 
     let login = $("[name='login']").val();

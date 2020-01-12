@@ -1,4 +1,5 @@
-<button type="button" class="btns seeds">SEED</button>
+<button type="button" class="btns example-seeder">EXAMPLE-SEEDER</button>
+<button type="button" class="btns user-seeder">USER-SEEDER</button>
 <button type="button" class="btns turn-cate">TURN CATE</button>
 <button type="button" class="btns row-new">ERSTELLEN</button>
 <hr>

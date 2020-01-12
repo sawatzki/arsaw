@@ -91,8 +91,8 @@
                         <div class='registration-message text-center'></div>
                     </div>
                     <div id="modal-login-form">
-                        <input type="text" name="login" placeholder="Login" value="User1">
-                        <input type="text" name="password" placeholder="Password" value="1234567">
+                        <input type="text" name="login" placeholder="Login" value="User">
+                        <input type="text" name="password" placeholder="Password" value="123123123">
                         <div class='login-message text-center'></div>
                     </div>
                 </div>
