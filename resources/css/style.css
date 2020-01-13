@@ -273,10 +273,9 @@ a.text-wheat:focus, a.text-wheat:hover {
     color: white;
 }
 
-/*#modal-login-form > input{*/
-/*    width: 49.5%;*/
-/*}*/
-
+.spinner-border{
+    display: none;
+}
 
 .login-message,
 .registration-message{

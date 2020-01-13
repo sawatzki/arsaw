@@ -122,10 +122,10 @@ $(document).on("click", "#btn-registration", function () {
                     
                     if($(".registration-message").css("display") === "block"){
                         $(".registration-message").slideToggle(function () {
-                            $(".registration-message").html("<div class='text-error'>" + registerLogin + " bereits exestiert ! </div>");
+                            $(".registration-message").html("<div class='text-error'>" + registerLogin + " existiert bereits !</div>");
                         });
                     }else{
-                        $(".registration-message").html("<div class='text-error'>" + registerLogin + " bereits exestiert ! </div>");
+                        $(".registration-message").html("<div class='text-error'>" + registerLogin + " existiert bereits !</div>");
                     }
 
                     $(".registration-message").slideToggle();
@@ -142,7 +142,7 @@ $(document).on("click", "#btn-registration", function () {
 
                     if ($("#modal-login-form").css("display") === "none") {
 
-                        $(".login-message").html("<div class='text-success'>" + registerLogin + " ist regestriert. Willkommen ! </div>");
+                        $(".login-message").html("<div class='text-success'>" + registerLogin + " ist registriert. Willkommen ! </div>");
 
                         $("[name='login']").val(registerLogin);
                         $("[name='password']").val(registerPassword);
@@ -161,6 +161,11 @@ $(document).on("click", "#btn-registration", function () {
                     }
 
                 }
+
+                $(".spinner-border").css("display", "none");
+            },
+            before: function () {
+                $(".spinner-border").css("display", "block");
             }
         });
 
@@ -177,6 +182,10 @@ $(document).on("click", ".user-seeder", function () {
         url: "core/login/data/userSeeder.php",
         success: function () {
             console.log("user seeder generated");
+            $(".spinner-border").css("display", "none");
+        },
+        start: function () {
+            $(".spinner-border").css("display", "block");
         }
     });
 

@@ -33,7 +33,7 @@
             <?php endif; ?>
             <div class="theme-style"><span class="btns">HELL</span></div>
             <div class="username" data-toggle="collapse" data-target="#black-line-contact">
-                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gust"; ?></div>
+                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gast"; ?></div>
             </div>
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
@@ -68,6 +68,15 @@
             </div>
 
         </nav>
+
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-light mt-5" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+<!--        <div class="spinner-border text-light" role="status">-->
+<!--            <span class="sr-only">Loading...</span>-->
+<!--        </div>-->
 
     </header>
 
@@ -104,7 +113,6 @@
             </div>
         </div>
     </div>
-
     <div id="rows-info"></div>
     <main>
         <div id="view">

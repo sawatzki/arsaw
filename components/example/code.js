@@ -113,11 +113,13 @@ $(document).ready(function () {
                         $(".rows").html("No data");
                     }
                 }
+                $(".spinner-border").css("display", "none");
             },
             beforeSend: function () {
-            inProgress = true;
-        }
-    })
+                $(".spinner-border").css("display", "block");
+                inProgress = true;
+            }
+        })
         ;
     }
 
@@ -327,7 +329,11 @@ $(document).ready(function () {
             success: function () {
                 console.log(view + "seeder generated");
                 secondLoad = true;
+                $(".spinner-border").css("display", "none");
                 fetchRows();
+            },
+            beforeSend: function () {
+                $(".spinner-border").css("display", "block");
             }
         });
 
@@ -342,7 +348,11 @@ $(document).ready(function () {
                     url: "components/" + view + "/data/turnCate.php",
                     success: function () {
                         alert("All example records was deleted!");
+                        $(".spinner-border").css("display", "none");
                         window.location.href = window.location.href;
+                    },
+                    beforeSend: function () {
+                        $(".spinner-border").css("display", "block");
                     }
                 });
             } else {
