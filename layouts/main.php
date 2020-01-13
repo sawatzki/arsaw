@@ -53,6 +53,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
+                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "user" ? "menu-active" : "" ?>"
+                           href="index.php?component=user">USERS</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">MUSTER</a>
                     </li>
@@ -74,9 +78,6 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-<!--        <div class="spinner-border text-light" role="status">-->
-<!--            <span class="sr-only">Loading...</span>-->
-<!--        </div>-->
 
     </header>
 
