@@ -31,7 +31,7 @@
                     <span class="btns btn-login" data-toggle="modal" data-target="#loginModal">LOGIN</span>
                 </div>
             <?php endif; ?>
-            <div class="theme-style"><span class="btns">HELL</span></div>
+            <div class="theme-style"><span class="btns theme-light">HELL</span></div>
             <div class="username" data-toggle="collapse" data-target="#black-line-contact">
                 <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gast"; ?></div>
             </div>
@@ -52,10 +52,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
+                    <?php if($_COOKIE['role'] == "root" || $_COOKIE['role'] == "superadmin"): ?>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "user" ? "menu-active" : "" ?>"
                            href="index.php?component=user">USERS</a>
                     </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">MUSTER</a>

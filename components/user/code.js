@@ -41,90 +41,91 @@ $(document).ready(function () {
             startFrom = 0;
         }
         // while($("#view").height() < $(window).height()) {
-
-
-
-        console.log("view: " + $("#view").height());
-        console.log("window: " + $(window).height());
+        // console.log("view: " + $("#view").height());
+        // console.log("window: " + $(window).height());
 
         $.ajax({
-                url: "components/" + view + "/data/index.php",
-                type: "post",
-                dataType: "json",
-                data: {
-                    startFrom: startFrom,
-                    rowsCount: rowsCount
-                },
-                success: function (data) {
-                console.log("in SUCCESS");
-                    let out = '';
+            url: "components/" + view + "/data/index.php",
+            type: "post",
+            dataType: "json",
+            data: {
+                startFrom: startFrom,
+                rowsCount: rowsCount
+            },
+            success: function (data) {
+                // console.log("in SUCCESS");
+                let out = '';
 
-                    if (data.length > 0) {
+                if (data.length > 0) {
 
-                        $.each(data, function (index, row) {
+                    $.each(data, function (index, row) {
 
-                                out += "<div class='row' id='row-" + row.id + "'>";
-                                out += "<div class='row-value'>";
-                                out += "<div id='row-title-" + row.id + "'><b>" + row.login + ": " + row.role +"</b></div>";
+                            out += "<div class='row' id='row-" + row.id + "'>";
+                            out += "<div class='row-value'>";
+                            out += "<div id='row-title-" + row.id + "'><b>" + row.login + "</b></div>";
+                            if (row.info) {
                                 out += "<div id='row-description-" + row.id + "'>" + row.info + "</div>";
-                                out += "</div>";
-                                out += "<div class='cmd-group'>";
-                                out += "<button type='button' class='example-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
+                            } else {
+                                out += "<div id='row-description-" + row.id + "'> ... </div>";
+                            }
+                            out += "</div>";
+                            out += "<div class='cmd-group'>";
+                            out += "<button type='button' class='row-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
 
-                                if (role) {
-                                    if (role === "root" || role === "superadmin" || role === "admin" || role === "moderator") {
+                            if (role) {
+                                if (role === "root" || role === "superadmin" || role === "admin" || role === "moderator") {
 
-                                        out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
-                                        if (row.active == 1) {
-                                            out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
-                                        } else {
-                                            out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
-                                        }
-
-                                        if (role === "root" || role === "superadmin") {
-                                            out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
-                                        }
+                                    out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
+                                    if (row.active == 1) {
+                                        out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
+                                    } else {
+                                        out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
                                     }
 
+                                    if (role === "root" || role === "superadmin") {
+                                        out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
+                                    }
                                 }
-                                out += "</div>";
-
-                                out += "<div id='edit-row-" + row.id + "' style='display: none'>";
-                                out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
-                                out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
-                                out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
-                                out += "</div>";
-
-                                out += "</div>";
 
                             }
-                        );
+                            out += "</div>";
 
-                        if (secondLoad) {
+                            out += "<div id='edit-row-" + row.id + "' style='display: none'>";
+                            out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
+                            out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
+                            out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
+                            out += "</div>";
 
-                            $(".rows").html(out);
+                            out += "</div>";
 
-                        } else {
-                            $(".rows").append(out);
                         }
-                        secondLoad = false
-                        inProgress = false;
+                    );
 
-                        startFrom += 5;
+                    if (secondLoad) {
+
+                        $(".rows").html(out);
 
                     } else {
-                        if ($("#root").height() < 25) {
-                            $(".rows").html("No data");
-                        }
+                        $(".rows").append(out);
                     }
+                    secondLoad = false
+                    inProgress = false;
 
-                    $(".spinner-border").css("display", "none");
-                },
-                beforeSend: function () {
-                    $(".spinner-border").css("display", "block");
-                    inProgress = true;
+                    startFrom += 5;
+
+                } else {
+                    if ($("#root").height() < 25) {
+                        $(".rows").html("No data");
+                    }
                 }
-            });
+
+                $(".spinner-border").css("display", "none");
+            },
+            beforeSend: function () {
+                $(".spinner-border").css("display", "block");
+                inProgress = true;
+            }
+        });
 
     }
 
@@ -231,7 +232,7 @@ $(document).ready(function () {
 
     });
 
-    $(document).on("click", ".example-read", function () {
+    $(document).on("click", ".row-read", function () {
 
         let id = $(this).attr("value");
 
@@ -249,9 +250,24 @@ $(document).ready(function () {
                 out += "<div class='modal-dialog' role='document'>";
                 out += "<div class='modal-content'>";
 
-                out += "<h2 class='text-light text-center'>" + data.title + "</h2>";
+                out += "<h2 class='text-light text-center'>" + data.login + "</h2>";
                 out += "<hr class='hr-light'>";
-                out += "<div class='text-light text-center mb-3 p-2'>" + data.description + "</div>";
+
+                if (data.first_name) {
+                    out += "<div class='text-light text-center mb-3 p-2'>" + data.first_name + "</div>";
+                }
+                if (data.last_name) {
+                    out += "<div class='text-light text-center mb-3 p-2'>" + data.last_name + "</div>";
+                }
+                if (data.email) {
+                    out += "<div class='text-light text-center mb-3 p-2'>" + data.email + "</div>";
+                }
+                if (data.tel) {
+                    out += "<div class='text-light text-center mb-3 p-2'>" + data.tel + "</div>";
+                }
+                if (data.info) {
+                    out += "<div class='text-light text-center mb-3 p-2'>" + data.info + "</div>";
+                }
 
                 out += "<button type='button' class='btns' data-dismiss='modal'>Close</button>";
                 out += "</div>";

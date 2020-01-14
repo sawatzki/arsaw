@@ -119,12 +119,12 @@ $(document).on("click", "#btn-registration", function () {
             success: function (data) {
                 if (data) {
                     //user exist
-                    
-                    if($(".registration-message").css("display") === "block"){
+
+                    if ($(".registration-message").css("display") === "block") {
                         $(".registration-message").slideToggle(function () {
                             $(".registration-message").html("<div class='text-error'>" + registerLogin + " existiert bereits !</div>");
                         });
-                    }else{
+                    } else {
                         $(".registration-message").html("<div class='text-error'>" + registerLogin + " existiert bereits !</div>");
                     }
 
@@ -133,7 +133,7 @@ $(document).on("click", "#btn-registration", function () {
                 } else {
                     //user created
 
-                    if($(".registration-message").css("display") === "block"){
+                    if ($(".registration-message").css("display") === "block") {
                         $(".registration-message").slideToggle(function () {
                             $(".registration-message").html("");
                         });
@@ -191,6 +191,17 @@ $(document).on("click", ".user-seeder", function () {
 
 });
 
+$(document).on(".theme-light", "click", function () {
+    $("body").css({
+        "background": "url('resources/images/bg_code.jpg') center center no-repeat fixed",
+        "background-size": "cover"
+    });
+})
+
+$(this).css({
+    "background-color": "yellow",
+    "font-weight": "bolder"
+});
 $(document).on("click", ".btn-logout", function () {
     deleteCookie("logged");
     deleteCookie("role");

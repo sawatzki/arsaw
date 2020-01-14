@@ -28,7 +28,10 @@ class User extends BaseModel
     {
         $data = null;
 
-        $query = "SELECT * FROM examples WHERE id = '$id'";
+        $query = "SELECT u.login, r.role, u.first_name, u.last_name, u.email, u.mobile, u.tel, u.info 
+        FROM users AS u
+        LEFT JOIN roles r ON r.id = u.role_id
+        WHERE u.id = '$id'";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
