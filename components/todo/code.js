@@ -3,7 +3,7 @@ $(document).ready(function () {
     let arrView = url.split("=");
     let view = arrView[1];
 
-    $(document).on("click", ".example-read", function () {
+    $(document).on("click", ".row-read", function () {
 
         let id = $(this).attr("value");
 

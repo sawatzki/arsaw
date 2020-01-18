@@ -24,21 +24,25 @@
         <div class="black-line">
             <?php if (isset($_COOKIE['logged'])): ?>
                 <div class="login">
-                    <span class="btns btn-logout">LOGOUT</span>
+<!--                    <span class="btns btn-logout">LOGOUT</span>-->
+                    <div class="username" data-toggle="collapse" data-target="#black-line-contact">
+                        <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gast"; ?></div>
+                    </div>
                 </div>
             <?php else: ?>
                 <div class="login">
                     <span class="btns btn-login" data-toggle="modal" data-target="#loginModal">LOGIN</span>
                 </div>
             <?php endif; ?>
-            <div class="theme-style"><span class="btns theme-light">HELL</span></div>
-            <div class="username" data-toggle="collapse" data-target="#black-line-contact">
-                <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gast"; ?></div>
-            </div>
+            <!--            <div class="theme-style"><span class="btns theme-light">HELL</span></div>-->
+<!--            <div class="username" data-toggle="collapse" data-target="#black-line-contact">-->
+<!--                <div>--><?//= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gast"; ?><!--</div>-->
+<!--            </div>-->
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
                 <div>Email: artsawatzki@gmail.com</div>
-                <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>
+                <span class="btns btn-logout">LOGOUT</span>
+                <!--                <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>-->
             </div>
         </div>
 
@@ -52,12 +56,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <?php if($_COOKIE['role'] == "root" || $_COOKIE['role'] == "superadmin"): ?>
-                    <li class="nav-item">
-                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "user" ? "menu-active" : "" ?>"
-                           href="index.php?component=user">USERS</a>
-                    </li>
-                    <?php endif; ?>
+
+                    <?php if (isset($_COOKIE['role'])) { ?>
+                        <?php if ($_COOKIE['role'] == "root" || $_COOKIE['role'] == "superadmin") { ?>
+                            <li class="nav-item">
+                                <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "user" ? "menu-active" : "" ?>"
+                                   href="index.php?component=user">USERS</a>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">MUSTER</a>

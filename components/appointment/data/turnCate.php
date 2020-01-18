@@ -5,11 +5,9 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '..') . $ds;
 
 include_once "{$base_dir}Example.php";
 
-$obj = new Example();
-$insert = $obj->insert();
+$obj = new Appointment();
+$insert = $obj->turncate();
 
-if($insert){
-    echo true;
-}else{
-    echo false;
-}
+echo $insert;
+
+

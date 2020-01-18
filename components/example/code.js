@@ -65,7 +65,7 @@ $(document).ready(function () {
                             out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
                             out += "</div>";
                             out += "<div class='cmd-group'>";
-                            out += "<button type='button' class='example-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
+                            out += "<button type='button' class='row-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
 
                             if (role) {
                                 if (role === "root" || role === "superadmin" || role === "admin" || role === "moderator") {
@@ -226,7 +226,7 @@ $(document).ready(function () {
 
     });
 
-    $(document).on("click", ".example-read", function () {
+    $(document).on("click", ".row-read", function () {
 
         let id = $(this).attr("value");
 
