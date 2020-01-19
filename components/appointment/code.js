@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     let inProgress = false;
     let startFrom = 0;
-    let rowsCount = 5;
+    let rowsCount = 10;
 
     $(window).scroll(function () {
 
@@ -71,6 +71,7 @@ $(document).ready(function () {
 
                             out += "<div class='row' id='row-" + row.id + "'>";
                             out += "<div class='row-value'>";
+                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.day + " " + row.time + "</b></div>";
                             out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
                             out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
                             out += "</div>";
@@ -117,7 +118,7 @@ $(document).ready(function () {
                     secondLoad = false
                     inProgress = false;
 
-                    startFrom += 5;
+                    startFrom += 10;
 
                 } else {
                     if ($("#root").height() < 25) {
@@ -139,6 +140,8 @@ $(document).ready(function () {
     $(document).on("click", "#row-save", function () {
 
         let title = $("[name='title']").val().trim();
+        let time = $("[name='time']").val().trim();
+        let day = $("[name='day']").val().trim();
         let description = $("[name='description']").val().trim();
 
         $.ajax({
@@ -146,6 +149,8 @@ $(document).ready(function () {
             type: "post",
             data: {
                 title: title,
+                time: time,
+                day: day,
                 description: description
             },
             success: function (data) {
@@ -165,6 +170,79 @@ $(document).ready(function () {
             }
         });
 
+    });
+
+    $(document).on("click", ".row-read", function () {
+
+        let id = $(this).attr("value");
+
+        $.ajax({
+            url: "components/" + view + "/data/read.php",
+            type: "post",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (data) {
+
+                let out = "";
+
+                out += "<div class='modal-dialog' role='document'>";
+                out += "<div class='modal-content'>";
+
+                out += "<h2 class='text-light text-center'>" + data.title + "</h2>";
+                out += "<hr class='hr-light'>";
+                out += "<div class='text-light text-center mb-3 p-2'>" + data.description + "</div>";
+
+                out += "<button type='button' class='btns' data-dismiss='modal'>Close</button>";
+                out += "</div>";
+                out += "</div>";
+
+
+                $("#modal-row-read").html(out);
+
+            }
+        });
+    });
+
+    $(document).on("click", ".row-destroy", function () {
+
+        if (window.confirm("Wirklich löschen ?")) {
+            if (window.confirm("Ohne Wiederherstellmöglichkeit ?")) {
+
+                let id = $(this).attr("value");
+
+                $.ajax({
+                    url: "components/" + view + "/data/destroy.php",
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        if (data) {
+                            $("#rows-info").css("display", "block");
+                            $(".rows-info").removeClass();
+                            $("#rows-info").addClass("rows-info rows-info-success");
+                            $("#rows-info").html("Row destroyed");
+                            $("#row-" + id).slideToggle(function () {
+                                if ($(window).height() > $("#view").height()) {
+                                    fetchRows();
+                                }
+                            });
+                        } else {
+                            $("#rows-info").css("display", "block");
+                            $(".rows-info").removeClass();
+                            $("#rows-info").addClass("rows-info rows-info-error");
+                            $("#rows-info").html("NICHT gelöscht !");
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+        } else {
+            return false
+        }
     });
 
 });

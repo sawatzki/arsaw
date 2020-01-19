@@ -14,6 +14,8 @@
 <?php } ?>
 <div class="row-new-form">
     <input name="title" type="text" class="input-text-edit" placeholder="Titel">
+    <input name="day" type="date" class="input-text-edit" placeholder="Tag">
+    <input name="time" type="time" class="input-text-edit" placeholder="Zeit">
     <textarea name="description" class="input-text-edit" type="text" placeholder="Beschreibung"></textarea>
     <input id="row-save" class="btns" value="Speichern"/>
 </div>

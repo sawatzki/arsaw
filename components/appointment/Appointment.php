@@ -1,5 +1,6 @@
 <?php
 
+
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__) . $ds . '..' . $ds . '..') . $ds;
 
@@ -11,7 +12,7 @@ class Appointment extends BaseModel
     {
         $data = null;
 
-        $query = "SELECT a.id, a.title, a.description 
+        $query = "SELECT a.id, a.title, a.description, a.day, a.time
             FROM appointments AS a
             ORDER BY id 
             DESC LIMIT $startFrom, $rowsCount";
@@ -27,7 +28,7 @@ class Appointment extends BaseModel
     {
         $data = null;
 
-        $query = "SELECT * FROM examples WHERE id = '$id'";
+        $query = "SELECT * FROM appointments WHERE id = '$id'";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -40,7 +41,7 @@ class Appointment extends BaseModel
     {
         $data = null;
 
-        $query = "DELETE FROM examples WHERE id = '$id'";
+        $query = "DELETE FROM appointments WHERE id = '$id'";
 
         if ($stmt = $this->conn->exec($query)) {
             return true;
@@ -53,7 +54,7 @@ class Appointment extends BaseModel
     {
         $data = null;
 
-        $query = "UPDATE examples SET active = $active WHERE id = '$id'";
+        $query = "UPDATE appointments SET active = $active WHERE id = '$id'";
 
         if ($stmt = $this->conn->exec($query)) {
             return true;
@@ -64,7 +65,7 @@ class Appointment extends BaseModel
 
     public function update($data)
     {
-        $query = "UPDATE examples SET title='$data[title]', description='$data[description]' WHERE id='$data[id]'";
+        $query = "UPDATE appointments SET title='$data[title]', description='$data[description]' WHERE id='$data[id]'";
         if ($stmt = $this->conn->exec($query)) {
             return true;
         } else {
@@ -78,10 +79,12 @@ class Appointment extends BaseModel
         if (isset($_POST['title'])) {
             if (!empty($_POST['title'])) {
 
+                $date = $_POST['day'];
+                $time = $_POST['time'];
                 $title = $_POST['title'];
                 $description = $_POST['description'];
 
-                $query = "INSERT INTO appointments (title, description) VALUES ('$title', '$description')";
+                $query = "INSERT INTO appointments (day, time, title, description) VALUES ('$date', '$time', '$title', '$description')";
                 if ($stmt = $this->conn->exec($query)) {
                     return "inserted";
                 } else {
