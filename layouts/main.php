@@ -8,6 +8,12 @@
     <title>CMS</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--    https://cdnjs.com/libraries/jquery-datetimepicker-->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+
     <link rel="stylesheet" href="resources/css/style.css">
     <?= file_exists("components/<?= $component ?>/style.css") ? "<link rel='stylesheet' href='components/$component/style.css'>" : "" ?>
     <style>
@@ -19,12 +25,13 @@
 </head>
 <body>
 <div id="wrapper">
+
+
     <header class="fixed-top">
 
         <div class="black-line">
             <?php if (isset($_COOKIE['logged'])): ?>
                 <div class="login">
-<!--                    <span class="btns btn-logout">LOGOUT</span>-->
                     <div class="username" data-toggle="collapse" data-target="#black-line-contact">
                         <div><?= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gast"; ?></div>
                     </div>
@@ -34,15 +41,11 @@
                     <span class="btns btn-login" data-toggle="modal" data-target="#loginModal">LOGIN</span>
                 </div>
             <?php endif; ?>
-            <!--            <div class="theme-style"><span class="btns theme-light">HELL</span></div>-->
-<!--            <div class="username" data-toggle="collapse" data-target="#black-line-contact">-->
-<!--                <div>--><?//= isset($_COOKIE['logged']) ? $_COOKIE['logged'] . "[" . $_COOKIE['role'] . "]" : "Gast"; ?><!--</div>-->
-<!--            </div>-->
+
             <div id="black-line-contact" class="collapse">
                 <div>Handy: 0176 47607548</div>
                 <div>Email: artsawatzki@gmail.com</div>
                 <span class="btns btn-logout">LOGOUT</span>
-                <!--                <div><a target="_blank" href="https://www.xing.com/profile/Artem_Sawatzki/cv">XING</a></div>-->
             </div>
         </div>
 
@@ -110,8 +113,8 @@
                         <div class='registration-message text-center'></div>
                     </div>
                     <div id="modal-login-form">
-                        <input type="text" name="login" placeholder="Login" value="User">
-                        <input type="text" name="password" placeholder="Password" value="123123123">
+                        <input type="text" name="login" placeholder="Login" value="Superadmin">
+                        <input type="password" name="password" placeholder="Password" value="123123123">
                         <div class='login-message text-center'></div>
                     </div>
                 </div>
@@ -126,6 +129,9 @@
     <div id="rows-info"></div>
     <main>
         <div id="view">
+
+            <input id="datepicker" width="276"/>
+
             <?php file_exists("components/$component/controller.php") ? require_once "components/$component/controller.php" : require_once "no_component.php"; ?>
         </div>
     </main>
@@ -146,7 +152,13 @@
 
 </div>
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+        crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
@@ -155,6 +167,12 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="resources/js/main.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+
+
+<!--<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script> datapicker-->
+
 <?= file_exists("components/$component/controller.php") ? "<script src='./components/$component/code.js'></script>" : "" ?>
 </body>
 

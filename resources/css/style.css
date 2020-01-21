@@ -303,6 +303,10 @@ a.text-wheat:focus, a.text-wheat:hover {
     padding: 0.5rem 1rem;
 }
 
+.control-panel{
+    text-align: center;
+}
+
 @media (min-width: 993px) {
 
 }

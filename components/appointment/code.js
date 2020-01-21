@@ -1,6 +1,9 @@
 $(document).ready(function () {
     let secondLoad = false;
 
+    $("[name='time']").datetimepicker({
+        format:'d.m.Y H:i'
+    });
 
     let role = null;
     if (getCookie("role")) {
@@ -41,8 +44,6 @@ $(document).ready(function () {
     });
 
 
-
-
     function fetchRows() {
 
         if (!view) {
@@ -71,7 +72,7 @@ $(document).ready(function () {
 
                             out += "<div class='row' id='row-" + row.id + "'>";
                             out += "<div class='row-value'>";
-                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.day + " " + row.time + "</b></div>";
+                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.day + "</b></div>";
                             out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
                             out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
                             out += "</div>";
@@ -141,7 +142,7 @@ $(document).ready(function () {
 
         let title = $("[name='title']").val().trim();
         let time = $("[name='time']").val().trim();
-        let day = $("[name='day']").val().trim();
+        // let day = $("[name='day']").val();
         let description = $("[name='description']").val().trim();
 
         $.ajax({
@@ -150,7 +151,7 @@ $(document).ready(function () {
             data: {
                 title: title,
                 time: time,
-                day: day,
+                // day: day,
                 description: description
             },
             success: function (data) {
@@ -193,6 +194,7 @@ $(document).ready(function () {
                 out += "<h2 class='text-light text-center'>" + data.title + "</h2>";
                 out += "<hr class='hr-light'>";
                 out += "<div class='text-light text-center mb-3 p-2'>" + data.description + "</div>";
+                out += "<div class='text-light text-center mb-3 p-2'>" + data.day + " " + data.time + "</div>";
 
                 out += "<button type='button' class='btns' data-dismiss='modal'>Close</button>";
                 out += "</div>";
@@ -203,6 +205,81 @@ $(document).ready(function () {
 
             }
         });
+    });
+
+
+    $(document).on("click", ".row-edit", function () {
+        let id = $(this).attr("value");
+        $("#edit-row-" + id).slideToggle();
+    });
+
+    $(document).on("click", ".btn-row-update", function () {
+
+        let id = $(this).attr("value");
+        let title = $("[name='row_title_" + id + "']").val();
+        let description = $("[name='row_description_" + id + "']").val();
+
+        $.ajax({
+            url: "components/" + view + "/data/update.php",
+            type: "post",
+            dataType: "json",
+            data: {
+                id: id,
+                title: title,
+                description: description
+            },
+            success: function (data) {
+                $("#row-title-" + id).html(data.title);
+                $("#row-description-" + id).html(data.description);
+            }
+        });
+
+    });
+
+    $(document).on("click", ".row-delete", function () {
+
+        if (window.confirm("Wirklich löschen ?")) {
+
+            let id = $(this).attr("value");
+            let active = $(this).attr("act");
+            let deleteOn = $('#row-delete-' + id).text();
+
+            $.ajax({
+                url: "components/" + view + "/data/delete.php",
+                type: "post",
+                data: {
+                    id: id,
+                    active: active
+                },
+                success: function (data) {
+                    if (data) {
+                        $("#rows-info").css("display", "block");
+                        $(".rows-info").removeClass();
+                        $("#rows-info").addClass("rows-info rows-info-success");
+                        $("#rows-info").html("GELÖSCHT !");
+
+                        if (deleteOn === "on") {
+                            $('#row-delete-' + id).text("off");
+                        } else {
+                            $('#row-delete-' + id).text("on");
+                        }
+
+                    } else {
+
+                        $("#rows-info").css("display", "block");
+                        $(".rows-info").removeClass();
+                        $("#rows-info").addClass("rows-info rows-info-error");
+                        $("#rows-info").html("NICHT gelöscht !");
+
+                    }
+                }
+            });
+
+
+        } else {
+            return false;
+        }
+
     });
 
     $(document).on("click", ".row-destroy", function () {

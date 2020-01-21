@@ -79,12 +79,12 @@ class Appointment extends BaseModel
         if (isset($_POST['title'])) {
             if (!empty($_POST['title'])) {
 
-                $date = $_POST['day'];
+//                $date = $_POST['day'];
                 $time = $_POST['time'];
                 $title = $_POST['title'];
                 $description = $_POST['description'];
 
-                $query = "INSERT INTO appointments (day, time, title, description) VALUES ('$date', '$time', '$title', '$description')";
+                $query = "INSERT INTO appointments (day, time, title, description) VALUES ('$time', '$title', '$description')";
                 if ($stmt = $this->conn->exec($query)) {
                     return "inserted";
                 } else {

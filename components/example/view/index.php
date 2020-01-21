@@ -1,16 +1,17 @@
 <?php if (isset($_COOKIE['role'])) { ?>
 
-    <?php if ($_COOKIE['role'] === "root" || $_COOKIE['role'] === "superadmin" || $_COOKIE['role'] === "admin" || $_COOKIE['role'] === "moderator") { ?>
-        <button type="button" class="btns row-new">ERSTELLEN</button>
+    <?php if (isset($_COOKIE['logged'])) { ?>
+        <div class="control-panel">
+            <button type="button" class="btns row-new">ERSTELLEN</button>
 
-        <?php if ($_COOKIE['role'] === "root" || $_COOKIE['role'] === "superadmin" || $_COOKIE['role'] === "admin") { ?>
-            <button type="button" class="btns example-seeder">EXAMPLE-SEEDER</button>
-            <button type="button" class="btns turn-cate">TURN CATE</button>
-            <?php if ($_COOKIE['role'] === "root" || $_COOKIE['role'] === "superadmin") { ?>
-                <button type="button" class="btns user-seeder">USER-SEEDER</button>
+            <?php if ($_COOKIE['role'] === "root" || $_COOKIE['role'] === "superadmin" || $_COOKIE['role'] === "admin") { ?>
+                <button type="button" class="btns example-seeder">EXAMPLE-SEEDER</button>
+                <button type="button" class="btns turn-cate">TURN CATE</button>
+                <?php if ($_COOKIE['role'] === "root" || $_COOKIE['role'] === "superadmin") { ?>
+                    <button type="button" class="btns user-seeder">USER-SEEDER</button>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
-
+        </div>
     <?php } ?>
     <hr>
 
