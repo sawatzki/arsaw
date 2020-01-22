@@ -168,9 +168,6 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 
-
-<!--<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script> datapicker-->
-
 <?= file_exists("components/$component/controller.php") ? "<script src='./components/$component/code.js'></script>" : "" ?>
 </body>
 

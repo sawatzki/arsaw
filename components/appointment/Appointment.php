@@ -69,7 +69,8 @@ class Appointment extends BaseModel
 
     public function update($data)
     {
-        $query = "UPDATE appointments SET title='$data[title]', description='$data[description]' WHERE id='$data[id]'";
+        $query = "UPDATE appointments SET date_time='$data[date_time]', title='$data[title]', description='$data[description]' WHERE id='$data[id]'";
+
         if ($stmt = $this->conn->exec($query)) {
             return true;
         } else {

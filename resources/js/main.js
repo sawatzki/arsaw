@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    let allowTimes = []
+    let allowTimes = [];
 
     for (let i = 0; i <= 23; i++) {
         if (i <= 9) {
@@ -20,6 +20,7 @@ $(document).ready(function(){
         format: 'Y-m-d H:i',
         allowTimes: allowTimes
     });
+
 });
 
 

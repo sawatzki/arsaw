@@ -9,9 +9,9 @@ $obj = new Appointment();
 
 $data['id'] = $_POST['id'];
 $data['title'] = $_POST['title'];
+$data['date_time'] = $_POST['dateTime'];
 $data['description'] = $_POST['description'];
 
 $update = $obj->update($data);
 
-//echo $update;
 echo json_encode($data);

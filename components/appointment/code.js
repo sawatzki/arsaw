@@ -67,33 +67,33 @@ $(document).ready(function () {
 
                             out += "<div class='row' id='row-" + row.id + "'>";
                             out += "<div class='row-value'>";
-                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.date_time + "</b></div>";
-                            out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
+                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.date_time.substring(0, row.date_time.length - 3) + "</b></div>";
+                            out += "<div id='row-title-" + row.id + "'>" + row.title + "</div>";
                             out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
                             out += "</div>";
                             out += "<div class='cmd-group'>";
                             out += "<button type='button' class='row-read' value='" + row.id + "' data-toggle='modal' data-target='#modal-row-read'>read</button>";
 
                             if (role) {
-                                if (role === "root" || role === "superadmin" || role === "admin" || role === "moderator") {
+                                // if (role === "root" || role === "superadmin" || role === "admin" || role === "moderator") {
 
-                                    out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
-                                    if (row.active == 1) {
-                                        out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
-                                    } else {
-                                        out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
-                                    }
-
-                                    if (role === "root" || role === "superadmin") {
-                                        out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
-                                    }
+                                out += "<button type='button' class='row-edit' value='" + row.id + "'>edit</button>";
+                                if (row.active == 1) {
+                                    out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='1' value='" + row.id + "'>off</button>";
+                                } else {
+                                    out += "<button type='button' id='row-delete-" + row.id + "' class='row-delete' act='0' value='" + row.id + "'>on</button>";
                                 }
+
+                                if (role === "root" || role === "superadmin") {
+                                    out += "<button type='button' class='row-destroy' value='" + row.id + "'>des</button>";
+                                }
+                                // }
 
                             }
                             out += "</div>";
 
-
                             out += "<div id='edit-row-" + row.id + "'>";
+                            out += "<input type='text' name='row_edit_date_time_" + row.id + "' class='input-text-edit' value='" + row.date_time.substring(0, row.date_time.length - 3) + "' placeholder='Datum'/>";
                             out += "<input type='text' name='row_title_" + row.id + "' class='input-text-edit' value='" + row.title + "' placeholder='Titel'/>";
                             out += "<textarea name='row_description_" + row.id + "'  class='input-text-edit' rows='' cols='' placeholder='Beschreibung'>" + row.description + "</textarea>";
                             out += "<button class='btn-row-update' value='" + row.id + "'>upd</button>";
@@ -202,6 +202,27 @@ $(document).ready(function () {
 
 
     $(document).on("click", ".row-edit", function () {
+        let allowTimes = [];
+
+        for (let i = 0; i <= 23; i++) {
+            if (i <= 9) {
+                allowTimes.push("0" + i + ":00");
+                allowTimes.push("0" + i + ":15");
+                allowTimes.push("0" + i + ":30");
+                allowTimes.push("0" + i + ":45");
+            } else {
+                allowTimes.push(i + ":00");
+                allowTimes.push(i + ":15");
+                allowTimes.push(i + ":30");
+                allowTimes.push(i + ":45");
+            }
+        }
+
+        $("[name^='row_edit_date_time_']").datetimepicker({
+            format: 'Y-m-d H:i',
+            allowTimes: allowTimes
+        });
+
         let id = $(this).attr("value");
         $("#edit-row-" + id).slideToggle();
     });
@@ -210,6 +231,7 @@ $(document).ready(function () {
 
         let id = $(this).attr("value");
         let title = $("[name='row_title_" + id + "']").val();
+        let dateTime = $("[name='row_edit_date_time_" + id + "']").val();
         let description = $("[name='row_description_" + id + "']").val();
 
         $.ajax({
@@ -218,10 +240,13 @@ $(document).ready(function () {
             dataType: "json",
             data: {
                 id: id,
+                dateTime: dateTime,
                 title: title,
                 description: description
             },
             success: function (data) {
+
+                $("#row-date-time-" + id).html("<b>" + data.date_time + "</b>");
                 $("#row-title-" + id).html(data.title);
                 $("#row-description-" + id).html(data.description);
             }
