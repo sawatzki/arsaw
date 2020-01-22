@@ -61,13 +61,13 @@ $(document).ready(function () {
 
                 let out = '';
 
-                if (data.length > 0) {
+                if (data && data.length > 0) {
 
                     $.each(data, function (index, row) {
 
                             out += "<div class='row' id='row-" + row.id + "'>";
                             out += "<div class='row-value'>";
-                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.time + "</b></div>";
+                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.date_time + "</b></div>";
                             out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
                             out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
                             out += "</div>";
@@ -137,7 +137,6 @@ $(document).ready(function () {
 
         let title = $("[name='title']").val().trim();
         let time = $("[name='time']").val().trim();
-        // let day = $("[name='day']").val();
         let description = $("[name='description']").val().trim();
 
         $.ajax({
@@ -145,8 +144,7 @@ $(document).ready(function () {
             type: "post",
             data: {
                 title: title,
-                time: time,
-                // day: day,
+                dateTime: time,
                 description: description
             },
             success: function (data) {

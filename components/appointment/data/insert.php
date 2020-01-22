@@ -6,7 +6,9 @@ $base_dir = realpath(dirname(__FILE__) . $ds . '..') . $ds;
 include_once "{$base_dir}Appointment.php";
 
 $obj = new Appointment();
-$insert = $obj->insert();
+
+$login = $_COOKIE['logged'];
+$insert = $obj->insert($login);
 
 if($insert){
     echo true;

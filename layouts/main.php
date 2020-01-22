@@ -71,10 +71,12 @@
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "example" ? "menu-active" : "" ?>"
                            href="index.php?component=example">MUSTER</a>
                     </li>
+                    <?php if (isset($_COOKIE['logged'])): ?>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "appointment" ? "menu-active" : "" ?>"
                            href="index.php?component=appointment">TERMINE</a>
                     </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "contacts" ? "menu-active" : "" ?>"
                            href="index.php?component=contacts">KONTAKT</a>
