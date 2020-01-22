@@ -26,7 +26,6 @@
 <body>
 <div id="wrapper">
 
-
     <header class="fixed-top">
 
         <div class="black-line">
@@ -129,9 +128,6 @@
     <div id="rows-info"></div>
     <main>
         <div id="view">
-
-            <input id="datepicker" width="276"/>
-
             <?php file_exists("components/$component/controller.php") ? require_once "components/$component/controller.php" : require_once "no_component.php"; ?>
         </div>
     </main>

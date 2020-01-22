@@ -1,3 +1,29 @@
+$(document).ready(function(){
+    let allowTimes = []
+
+    for (let i = 0; i <= 23; i++) {
+        if (i <= 9) {
+            allowTimes.push("0" + i + ":00");
+            allowTimes.push("0" + i + ":15");
+            allowTimes.push("0" + i + ":30");
+            allowTimes.push("0" + i + ":45");
+        } else {
+            allowTimes.push(i + ":00");
+            allowTimes.push(i + ":15");
+            allowTimes.push(i + ":30");
+            allowTimes.push(i + ":45");
+
+        }
+    }
+
+    $("[name='time']").datetimepicker({
+        format: 'Y-m-d H:i',
+        allowTimes: allowTimes
+    });
+});
+
+
+
 function getCookie(name) {
     let v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
     return v ? v[2] : null;

@@ -1,15 +1,10 @@
 $(document).ready(function () {
     let secondLoad = false;
 
-    $("[name='time']").datetimepicker({
-        format:'d.m.Y H:i'
-    });
-
     let role = null;
     if (getCookie("role")) {
         role = getCookie("role")
     }
-
 
     let url = document.location.href;
     let arrView = url.split("=");
@@ -72,7 +67,7 @@ $(document).ready(function () {
 
                             out += "<div class='row' id='row-" + row.id + "'>";
                             out += "<div class='row-value'>";
-                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.day + "</b></div>";
+                            out += "<div id='row-date-time-" + row.id + "'><b>" + row.time + "</b></div>";
                             out += "<div id='row-title-" + row.id + "'><b>" + row.title + "</b></div>";
                             out += "<div id='row-description-" + row.id + "'>" + row.description + "</div>";
                             out += "</div>";
