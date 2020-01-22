@@ -274,11 +274,13 @@ $(document).ready(function () {
                         $("#rows-info").css("display", "block");
                         $(".rows-info").removeClass();
                         $("#rows-info").addClass("rows-info rows-info-success");
-                        $("#rows-info").html("GELÖSCHT !");
+
 
                         if (deleteOn === "on") {
                             $('#row-delete-' + id).text("off");
+                            $("#rows-info").html("WIEDERHERGESTELLT !");
                         } else {
+                            $("#rows-info").html("GELÖSCHT !");
                             $('#row-delete-' + id).text("on");
                         }
 
@@ -292,7 +294,6 @@ $(document).ready(function () {
                     }
                 }
             });
-
 
         } else {
             return false;

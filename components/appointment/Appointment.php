@@ -15,7 +15,7 @@ class Appointment extends BaseModel
         if(isset($_COOKIE['logged'])) {
             $user_id = $this->user_id($_COOKIE['logged']);
 
-            $query = "SELECT a.id, a.title, a.description, a.date_time
+            $query = "SELECT a.id, a.title, a.description, a.date_time, a.active
             FROM appointments AS a
             WHERE a.user_id = $user_id
             ORDER BY id 
