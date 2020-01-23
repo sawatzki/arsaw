@@ -17,7 +17,7 @@ class Appointment extends BaseModel
 
             $query = "SELECT a.id, a.title, a.description, a.date_time, a.active
             FROM appointments AS a
-            WHERE a.user_id = $user_id
+            WHERE a.user_id = $user_id AND a.active = 1
             ORDER BY id 
             DESC LIMIT $startFrom, $rowsCount";
 
@@ -101,7 +101,7 @@ class Appointment extends BaseModel
                 $title = $_POST['title'];
                 $description = $_POST['description'];
 
-                $query = "INSERT INTO appointments (user_id, date_time, title, description) VALUES ('$id', '$time', '$title', '$description')";
+                $query = "INSERT INTO appointments (user_id, date_time, title, description, active) VALUES ('$id', '$time', '$title', '$description', '1')";
                 echo $query;
                 if ($stmt = $this->conn->exec($query)) {
                     return "inserted";

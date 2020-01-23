@@ -347,9 +347,12 @@ $(document).ready(function () {
                 $.ajax({
                     url: "components/" + view + "/data/turnCate.php",
                     success: function () {
-                        alert("All example records was deleted!");
                         $(".spinner-border").css("display", "none");
-                        window.location.href = window.location.href;
+                        $(".rows").slideToggle(function () {
+                            $(".rows").html("No data");
+                            alert("All example records was deleted!");
+                            window.location.href = window.location.href;
+                        });
                     },
                     beforeSend: function () {
                         $(".spinner-border").css("display", "block");

@@ -184,10 +184,10 @@ $(document).ready(function () {
                 out += "<div class='modal-dialog' role='document'>";
                 out += "<div class='modal-content'>";
 
-                out += "<h2 class='text-light text-center'>" + data.title + "</h2>";
+                out += "<h2 class='text-light text-center'>" + data.date_time + "</h2>";
                 out += "<hr class='hr-light'>";
-                out += "<div class='text-light text-center mb-3 p-2'>" + data.description + "</div>";
-                out += "<div class='text-light text-center mb-3 p-2'>" + data.day + " " + data.time + "</div>";
+                out += "<div class='text-light text-center mb-3 p-2'><>" + data.title + "</div>";
+                out += "<div class='text-light text-center mb-3 p-2'>" + data.description  + "</div>";
 
                 out += "<button type='button' class='btns' data-dismiss='modal'>Close</button>";
                 out += "</div>";
@@ -279,9 +279,16 @@ $(document).ready(function () {
                         if (deleteOn === "on") {
                             $('#row-delete-' + id).text("off");
                             $("#rows-info").html("WIEDERHERGESTELLT !");
+
+
                         } else {
                             $("#rows-info").html("GELÖSCHT !");
                             $('#row-delete-' + id).text("on");
+                            $("#row-" + id).slideToggle(function () {
+                                if ($(window).height() > $("#view").height()) {
+                                    fetchRows();
+                                }
+                            });
                         }
 
                     } else {
