@@ -6,12 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>CMS</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!--    https://cdnjs.com/libraries/jquery-datetimepicker-->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <?php if ($_SERVER['HTTP_HOST'] == "as"){ ?>
+        development
+        <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+        <!--    https://cdnjs.com/libraries/jquery-datetimepicker-->
+        <link rel="stylesheet"
+              href="../resources/css/jquery.datetimepicker.min.css">
+    <?php }else{ ?>
+        production
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!--    https://cdnjs.com/libraries/jquery-datetimepicker-->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+    <?php } ?>
 
 
     <link rel="stylesheet" href="resources/css/style.css">
@@ -72,10 +84,10 @@
                            href="index.php?component=example">MUSTER</a>
                     </li>
                     <?php if (isset($_COOKIE['logged'])): ?>
-                    <li class="nav-item">
-                        <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "appointment" ? "menu-active" : "" ?>"
-                           href="index.php?component=appointment">TERMINE</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "appointment" ? "menu-active" : "" ?>"
+                               href="index.php?component=appointment">TERMINE</a>
+                        </li>
                     <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "contacts" ? "menu-active" : "" ?>"
@@ -151,22 +163,35 @@
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
-        crossorigin="anonymous"></script>
+<?php if ($_SERVER['HTTP_HOST'] == "as"){ ?>
+    <script src="../resources/js/jquery.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="../resources/js/jquery-ui.min.js"></script>
 
-<script type="text/javascript" src="resources/js/main.js"></script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script src="../resources/js/popper.min.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="resources/js/main.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery.datetimepicker.full.min.js"></script>
+<?php } else { ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+            integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="resources/js/main.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<?php } ?>
 
 <?= file_exists("components/$component/controller.php") ? "<script src='./components/$component/code.js'></script>" : "" ?>
 </body>
