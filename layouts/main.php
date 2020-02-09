@@ -77,6 +77,10 @@
                                 <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "user" ? "menu-active" : "" ?>"
                                    href="index.php?component=user">USERS</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link col-md-12 pr-3 text-wheat <?= $component === "appointment" ? "menu-active" : "" ?>"
+                                   href="index.php?component=multi_upload_ajax">UPLOAD FILES - AJAX</a>
+                            </li>
                         <?php } ?>
                     <?php } ?>
                     <li class="nav-item">
